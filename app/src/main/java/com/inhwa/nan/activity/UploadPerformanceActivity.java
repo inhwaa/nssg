@@ -45,7 +45,11 @@ import com.inhwa.nan.app.AppController;
 import com.inhwa.nan.helper.SQLiteHandler;
 import com.inhwa.nan.helper.SessionManager;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -118,16 +122,16 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         session = new SessionManager(getApplicationContext());
 
         // Fetching user details from SQLite
-        HashMap<String, String> user = db.getUserDetails();
-        s_email = user.get("email").toString();
+//        HashMap<String, String> user = db.getUserDetails();
+//        s_email = user.get("email").toString();
 
-        Toast.makeText(getApplicationContext(), "이메일 : " + s_email, Toast.LENGTH_SHORT).show();
-        java.util.Calendar cal = java.util.Calendar.getInstance();
+        Date today = new Date ();
+        Calendar cal = Calendar.getInstance ( );
+        cal.setTime (today);
 
         year = cal.get ( cal.YEAR );
         month = cal.get ( cal.MONTH );
         day = cal.get ( cal.DATE ) ;
-
         hour = cal.get ( cal.HOUR_OF_DAY ) ;
         min = cal.get ( cal.MINUTE );
 
@@ -158,13 +162,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         spinnerSetGenre.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 s_genre = spinnerSetGenre.getSelectedItem().toString();
-                //   Toast.makeText(getApplicationContext(), "장르 : " + s_genre, Toast.LENGTH_SHORT).show();
-               /* if(parent.getSelectedItemPosition() == 0){
-                    Toast.makeText(getApplicationContext(), "장르를 선택해줍쇼", Toast.LENGTH_SHORT).show();
-                }else {
-                    s_genre = spinnerSetGenre.getSelectedItem().toString();
-                    Toast.makeText(getApplicationContext(), "장르 : " + s_genre, Toast.LENGTH_SHORT).show();
-                }*/
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -175,7 +172,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         spinnerSetRegion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 s_region = spinnerSetRegion.getSelectedItem().toString();
-                // Toast.makeText(getApplicationContext(), "지역 : " + s_region, Toast.LENGTH_SHORT).show();
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
@@ -185,21 +181,20 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         btnSetImage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 albumAction();
-                //Toast.makeText(getApplicationContext(), "공연 홍보 이미지를 선택하세요.", Toast.LENGTH_SHORT).show();
             }
 
         });
 
         btnSetDate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "공연 날짜를 선택하세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "공연날짜를 선택하세요.", Toast.LENGTH_SHORT).show();
                 showDialog(DIALOG_DATE);
             }
         });
 
         btnSetTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "공연 시간 선택.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "공연시간을 선택하세요.", Toast.LENGTH_LONG).show();
                 showDialog(DIALOG_TIME);
             }
         });
@@ -262,10 +257,9 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                                 s_year = year;
                                 s_month = month + 1;
                                 s_day = dayOfMonth;
-
-                                date_view.setText(s_year + "년 " + s_month + "월 " + s_day + "일 ");
+                                date_view.setText(s_year + "/" + s_month + "/" + s_day);
                             }
-                        }, 2017, 6, 25); //오늘 날짜로 초기화 하고싶다
+                        }, year, month, day); //오늘 날짜로 초기화 하고싶다
                 return dpd;
 
             case DIALOG_TIME:
@@ -276,10 +270,11 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                                 Toast.makeText(getApplicationContext(),
                                         hourOfDay + "시 " + minute + "분을 선택했습니다",
                                         Toast.LENGTH_SHORT).show();
-
-                                time_view.setText(hourOfDay + "시" + minute + "분");
+                                s_hour = hourOfDay;
+                                s_min = minute;
+                                time_view.setText(s_hour + ":" + s_min);
                             }
-                        }, 7, 30, false);
+                        }, hour, min, false);
                 return tpd;
         }
         return super.onCreateDialog(id);
@@ -289,8 +284,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         Intent albumIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         albumIntent.setType("image/*");
         albumIntent.putExtra("crop", "false");
-        //albumIntent.putExtra("aspectX", 1);
-        //albumIntent.putExtra("aspectY", 1);
         albumIntent.putExtra("outputX", 150);
         albumIntent.putExtra("outputY", 205);
         albumIntent.putExtra("return-data", false);
@@ -363,8 +356,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Register Response: " + response.toString());
-                // hideDialog();
-
             /*    try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
