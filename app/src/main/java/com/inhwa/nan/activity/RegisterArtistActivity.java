@@ -49,6 +49,9 @@ public class RegisterArtistActivity extends Activity {
     private SQLiteHandler db;
 
 
+    final int REGISTER = 1;
+    final int REGISTER2 = 2;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +97,7 @@ public class RegisterArtistActivity extends Activity {
                 String introduction = inputIntroduction.getText().toString();
 
                 if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
-                    registerArtist(name, email, password, introduction);
+                    registerArtist(REGISTER, name, email, password, introduction);
                     Toast.makeText(getApplicationContext(), "인증메일을 발송하였습니다. 인증을 완료해야 회원가입이 완료됩니다.", Toast.LENGTH_LONG)
                             .show();
                 } else {
@@ -106,33 +109,15 @@ public class RegisterArtistActivity extends Activity {
             }
         });
 
-
-
         // Register Button Click event
         btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-
+                String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
-                registerArtist2(email);
-              /*  HashMap<String, String> user = db.getUserDetails();
-                String verify = user.get("verify");
+                String password = inputPassword.getText().toString().trim();
+                String introduction = inputIntroduction.getText().toString();
 
-                if(verify == "0"){
-                    Toast.makeText(getApplicationContext(),
-                            "인증메일을 확인해주세요", Toast.LENGTH_LONG).show();
-
-                }else {
-                    String email = inputEmail.getText().toString().trim();
-                    registerArtist2(email);
-
-                    // Launch login activity
-                    Intent intent = new Intent(
-                            RegisterArtistActivity.this,
-                            LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-*/
+                registerArtist(REGISTER2, name, email, password, introduction);
 
             }
         });
@@ -150,156 +135,77 @@ public class RegisterArtistActivity extends Activity {
 
     }
 
-    //registerArtist start, take the data from MYSQL and store them to the sqlite
-    private void registerArtist2(final String email){
-        String tag_string_req = "req_verify";
-
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_REGISTER_ARTIST2, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                Log.d(TAG, "Register Response: " + response.toString());
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        // User successfully stored in MySQL
-                        // Now store the user in sqlite
-                        String uid = jObj.getString("uid");
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
-                        String verify = user.getString("verify");
-
-                        db.addUser(name, email, uid, created_at, "nickname", "image.com", verify);
-                        // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterArtistActivity.this,
-                                LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
-
-
-
-                        // Inserting row in users table
-                   /*     if(verify.matches("0")){
-                            Toast.makeText(getApplicationContext(), "check your e-mail.", Toast.LENGTH_LONG)
-                                    .show();
-                        }else if(verify.matches("1")){
-                            db.addUser(name, email, uid, created_at, verify);
-                            // Launch login activity
-                            Intent intent = new Intent(
-                                    RegisterArtistActivity.this,
-                                    LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-
-                            Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
-
-                        }*/
-
-
-
-                    } else {
-
-                        // Error occurred in registration. Get the error
-                        // message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() { //error
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                //     hideDialog();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting params to register url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-
-                //데이터넘기기
-
-                return params;
-            }
-        };
-
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-    } //verify end
-
-
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
      * */
 
-    //verify & register to MYSQL DB - registerArtist2
-    private void registerArtist(final String name, final String email,
+    //verify & register to MYSQL DB - registerArtist
+    private void registerArtist(final int id, final String name, final String email,
                                 final String password, final String introduction) {
         // Tag used to cancel the request
         String tag_string_req = "req_register_artist";
+        String URL ="";
 
         pDialog.setMessage("Registering ...");
         showDialog();
 
+        if(id == 1){
+            URL = AppConfig.URL_REGISTER_ARTIST;
+        }else if(id == 2){
+            URL = AppConfig.URL_REGISTER_ARTIST2;
+        }
+
         StringRequest strReq = new StringRequest(Method.POST,
-                AppConfig.URL_REGISTER_ARTIST, new Response.Listener<String>() {
+                URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Register_artist Response: " + response.toString());
                 hideDialog();
-/*
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
-                    if (!error) {
-                        // User successfully stored in MySQL
-                        // Now store the user in sqlite
-                        String uid = jObj.getString("uid");
-                        JSONObject user = jObj.getJSONObject("user");
-                        String name = user.getString("name");
-                        String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
-                        String verify = user.getString("verify");
+
+                if(id==2) {
+                    try {
+                        JSONObject jObj = new JSONObject(response);
+                        boolean error = jObj.getBoolean("error");
+                        if (!error) {
+                            // User successfully stored in MySQL
+                            // Now store the user in sqlite
+                            String uid = jObj.getString("uid");
+                            JSONObject user = jObj.getJSONObject("user");
+                            String name = user.getString("name");
+                            String email = user.getString("email");
+                            String created_at = user
+                                    .getString("created_at");
+                            String verify = user.getString("verify");
 
 
-                        // Inserting row in users table
-                        db.addUser(name, email, uid, created_at, verify);
+                            // Inserting row in users table
+                            if(verify.matches("1")){
+                                db.addUser(name, email, uid, created_at, "nickname", "image.com", verify);
 
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(
+                                        RegisterArtistActivity.this,
+                                        LoginActivity.class);
+                                startActivity(intent);
+                                finish();
 
-                    } else {
+                                Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(), "인증을 완료해야 회원가입이 완료됩니다.", Toast.LENGTH_LONG).show();
+                            }
 
-                        // Error occurred in registration. Get the error
-                        // message
-                        String errorMsg = jObj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                        } else {
+                            // Error occurred in registration. Get the error
+                            // message
+                            String errorMsg = jObj.getString("error_msg");
+                            Toast.makeText(getApplicationContext(),
+                                    errorMsg, Toast.LENGTH_LONG).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
-
+                }
             }
         }, new Response.ErrorListener() {
 
@@ -316,10 +222,10 @@ public class RegisterArtistActivity extends Activity {
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
-                params.put("email", email);
-                params.put("password", password);
-                params.put("introduction", introduction);
+                    params.put("name", name);
+                    params.put("email", email);
+                    params.put("password", password);
+                    params.put("introduction", introduction);
 
                 return params;
             }

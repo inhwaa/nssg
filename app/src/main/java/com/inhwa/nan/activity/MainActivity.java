@@ -77,15 +77,17 @@ public class MainActivity extends AppCompatActivity
         tabs = (TabLayout)findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 공연 업로드 Activity로 전환
-                Intent intent = new Intent(MainActivity.this, UploadPerformanceActivity.class);
-                startActivity(intent);
-            }
-        });
+        if(verify.matches("1")) {
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // 공연 업로드 Activity로 전환
+                    Intent intent = new Intent(MainActivity.this, UploadPerformanceActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

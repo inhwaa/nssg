@@ -73,6 +73,12 @@
         </activity>
 
         <activity
+            android:name=".activity.RegisterArtistActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+
+        <activity
             android:name="com.inhwa.nan.activity.EditInformationActivity"
             android:windowSoftInputMode="adjustPan">
         </activity>
@@ -95,6 +101,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
 
     </application>
 
