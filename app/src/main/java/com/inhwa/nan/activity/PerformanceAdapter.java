@@ -3,6 +3,9 @@ package com.inhwa.nan.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,6 +27,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
 
     private Context mContext;
     private List<Performance> performanceList;
+    private ColorFilter iLike;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -65,9 +69,15 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             favoriteImageButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Snackbar.make(v, "좋아요를 눌렀습니다.",
-                            Snackbar.LENGTH_LONG).show();
-                    favoriteImageButton.setColorFilter(Color.RED);
+                    if(v == favoriteImageButton) {
+                        Snackbar.make(v, "좋아요를 눌렀습니다.",
+                                Snackbar.LENGTH_LONG).show();
+                        favoriteImageButton.setColorFilter(Color.red(155));
+                        iLike = favoriteImageButton.getColorFilter();
+                    } else if (iLike.equals(Color.red(0))){
+                        favoriteImageButton.clearColorFilter();
+                        favoriteImageButton.setColorFilter(Color.GRAY);
+                    }
                 }
             });
 
