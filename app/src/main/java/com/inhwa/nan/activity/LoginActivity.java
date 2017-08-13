@@ -113,7 +113,7 @@ public class LoginActivity extends Activity {
                                     public void onClick(
                                             DialogInterface dialog, int id) {
                                         // ArtistRegisterActivity
-                                        Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                                        Intent i = new Intent(getApplicationContext(), RegisterArtistActivity.class);
                                         startActivity(i);
                                         finish();
                                     }

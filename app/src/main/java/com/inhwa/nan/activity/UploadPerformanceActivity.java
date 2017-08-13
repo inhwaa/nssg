@@ -280,6 +280,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         return super.onCreateDialog(id);
     }
 
+    //method to select the image
     private void albumAction() {
         Intent albumIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         albumIntent.setType("image/*");
