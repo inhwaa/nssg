@@ -51,8 +51,6 @@ public class PerformanceDetailActivity extends AppCompatActivity {
 //        placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
 //
 //        placePictures.recycle();
-
-
     }
 
     @Override
@@ -65,6 +63,4 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

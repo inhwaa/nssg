@@ -142,7 +142,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
         });
     }
 
-
     private void preparePerformances() {
 
         // region으로 찾기
@@ -157,17 +156,24 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                     try {
                         JSONObject jObj = new JSONObject(response);
+                        JSONArray jArry = jObj.getJSONArray("performances");
                         boolean error = jObj.getBoolean("error");
+
                         // Check for error node in json
                         if (!error) {
 
-                            JSONObject performance = jObj.getJSONObject("performance");
-                            String title = performance.getString("title");
+                            for (int i = 0; i < jArry.length(); i++) {
+                                JSONObject performance = jArry.getJSONObject(i);
+                                String title = performance.getString("title");
+                                String region = performance.getString("region");
+                                String genre = performance.getString("genre");
+                                String pdate = performance.getString("perform_date");
+                                String ptime = performance.getString("perform_time");
 
-//                            // Performance class 생성, 리스트에 추가한다.
-//                            Performance p = new Performance(title);
-//                            performanceList.add(p);
-
+                                // Performance class 생성, 리스트에 추가한다.
+                                Performance p = new Performance(title, region, genre, pdate, ptime);
+                                performanceList.add(p);
+                            }
                             adapter.notifyDataSetChanged();
 
                         } else {
@@ -181,14 +187,12 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-
                 }
             }, new Response.ErrorListener() {
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(),
-                            error.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }) {
 
@@ -200,13 +204,10 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                     return params;
                 }
-
             };
 
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-
         }
-
         // genre로 찾기
         else if (selection == 1) {
 
@@ -237,7 +238,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 // Performance class 생성, 리스트에 추가한다.
                                 Performance p = new Performance(title, region, genre, pdate, ptime);
                                 performanceList.add(p);
-
                             }
 
                             adapter.notifyDataSetChanged();
@@ -253,7 +253,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
-
                 }
             }, new Response.ErrorListener() {
 
@@ -272,12 +271,10 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                     return params;
                 }
-
             };
 
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
         }
-
     }
 
     /**

@@ -57,7 +57,6 @@ public class ListOfGenreFragment extends Fragment{
                     context.startActivity(intent);
                 }
             });
-
         }
     }
 
@@ -90,7 +89,5 @@ public class ListOfGenreFragment extends Fragment{
         public int getItemCount() {
             return LENGTH;
         }
-
-
     }
 }

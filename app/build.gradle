@@ -14,16 +14,8 @@ android {
     }
     buildTypes {
         release {
-            // 배포용 KEY
-            resValue "string", "google_maps_key", "{56:E1:4F:5E:BD:AB:95:49:1F:E7:C2:35:CB:01:C5:3E}"
-
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            // 개발용 KEY
-            resValue "string", "google_maps_key", "{AIzaSyC1bFf6nmcHC-q_-GCqSCSYY_Ag7NnqobE}"
-
         }
     }
 }
