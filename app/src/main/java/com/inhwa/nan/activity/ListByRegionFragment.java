@@ -56,7 +56,6 @@ public class ListByRegionFragment extends Fragment{
                     context.startActivity(intent);
                 }
             });
-
         }
     }
 

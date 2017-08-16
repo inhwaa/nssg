@@ -204,8 +204,8 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 //  Title = edtSetTitle.getText().toString();
 
                 String title = edtSetTitle.getText().toString();
-                String date = btnSetDate.getText().toString();
-                String time = btnSetTime.getText().toString();
+                String date = date_view.getText().toString();
+                String time = time_view.getText().toString();
                 String genre = s_genre;
                 String region = s_region;
                 String location = mPlaceDetailsText.getText().toString();
@@ -214,7 +214,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 String email = s_email;
 
                 // String
-                if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||location.matches("")||content.matches("")) {
+                if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||content.matches("")) {
                     Toast.makeText(getApplicationContext(), "모든 항목을 입력하세요", Toast.LENGTH_LONG).show();
                 } else {
                     uploadPerformance(title, date, time, genre, region, location, content, email);
@@ -284,43 +284,12 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         Intent albumIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         albumIntent.setType("image/*");
         albumIntent.putExtra("crop", "false");
-        albumIntent.putExtra("outputX", 150);
-        albumIntent.putExtra("outputY", 205);
+        albumIntent.putExtra("outputX", 300);
+        albumIntent.putExtra("outputY", 420);
+
         albumIntent.putExtra("return-data", false);
 
         startActivityForResult(albumIntent, 2);
-    }
-
-    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
-
-    private void openAutocompleteActivity() {
-        try {
-            // The autocomplete activity requires Google Play Services to be available. The intent
-            // builder checks this and throws an exception if it is not the case.
-            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(this);
-            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-        } catch (GooglePlayServicesRepairableException e) {
-            // Indicates that Google Play Services is either not installed or not up to date. Prompt
-            // the user to correct the issue.
-            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
-                    0 /* requestCode */).show();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            // Indicates that Google Play Services is not available and the problem is not easily
-            // resolvable.
-            String message = "Google Play Services is not available: " +
-                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
-
-            Log.e(TAG, message);
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * Helper method to format information about a place nicely.
-     */
-    private static Spanned formatPlaceDetails(Resources res, CharSequence name, CharSequence address, CharSequence phoneNumber) {
-        Log.e(TAG, res.getString(R.string.place_details, name, address, phoneNumber));
-        return Html.fromHtml(res.getString(R.string.place_details, name, address, phoneNumber));
     }
 
     @Override
@@ -333,7 +302,8 @@ public class UploadPerformanceActivity extends AppCompatActivity{
             Bundle extras = data.getExtras();
             Bitmap image = extras.getParcelable("data");
 
-            btnSetImage.setImageBitmap(image);
+            poster_view.setImageBitmap(image);
+            btnSetImage.setVisibility(View.INVISIBLE);
         }
 
         if (resultCode == 0) {
@@ -349,7 +319,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                                    final String location, final String content, final String email) {
 
         String tag_string_req = "req_uploadPerformance";
-
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_UPLOAD_PERFORMANCE, new Response.Listener<String>() {
 

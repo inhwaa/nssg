@@ -4,7 +4,6 @@ package com.inhwa.nan.activity;
  * Created by Inhwa_ on 2017-06-19.
  */
 
-
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -29,8 +28,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Set Collapsing Toolbar layout to the screen
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         // Set title of Detail page
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
@@ -53,8 +51,6 @@ public class PerformanceDetailActivity extends AppCompatActivity {
 //        placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
 //
 //        placePictures.recycle();
-
-
     }
 
     @Override
@@ -67,6 +63,4 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

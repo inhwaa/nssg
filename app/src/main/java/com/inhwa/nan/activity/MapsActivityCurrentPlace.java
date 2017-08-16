@@ -1,6 +1,5 @@
 package com.inhwa.nan.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
@@ -71,12 +69,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     private static final String KEY_LOCATION = "location";
 
     // Used for selecting the current place.
-    private final int mMaxEntries = 5;
-    private String[] mLikelyPlaceNames = new String[mMaxEntries];
-    private String[] mLikelyPlaceAddresses = new String[mMaxEntries];
-    private String[] mLikelyPlaceAttributions = new String[mMaxEntries];
-    private LatLng[] mLikelyPlaceLatLngs = new LatLng[mMaxEntries];
-
     private Spanned place_info;
     LatLng choosed_place;
     Intent intent3;
@@ -120,7 +112,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.option_get_place) {
             openAutocompleteActivity();
-            //showCurrentPlace();
         }
         if (item.getItemId() == R.id.save) {
             intent3 = new Intent(MapsActivityCurrentPlace.this, UploadPerformanceActivity.class);
@@ -300,8 +291,7 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
      */
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         mLocationPermissionGranted = false;
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
@@ -313,41 +303,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
             }
         }
         updateLocationUI();
-    }
-
-    /**
-     * Displays a form allowing the user to select a place from a list of likely places.
-     */
-    private void openPlacesDialog() {
-        // Ask the user to choose the place where they are now.
-        DialogInterface.OnClickListener listener =
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The "which" argument contains the position of the selected item.
-                        LatLng markerLatLng = mLikelyPlaceLatLngs[which];
-                        String markerSnippet = mLikelyPlaceAddresses[which];
-                        if (mLikelyPlaceAttributions[which] != null) {
-                            markerSnippet = markerSnippet + "\n" + mLikelyPlaceAttributions[which];
-                        }
-                        // Add a marker for the selected place, with an info window
-                        // showing information about that place.
-                        mMap.addMarker(new MarkerOptions()
-                                .title(mLikelyPlaceNames[which])
-                                .position(markerLatLng)
-                                .snippet(markerSnippet));
-
-                        // Position the map's camera at the location of the marker.
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
-                                DEFAULT_ZOOM));
-                    }
-                };
-
-        // Display the dialog.
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(R.string.pick_place)
-                .setItems(mLikelyPlaceNames, listener)
-                .show();
     }
 
     /**
@@ -399,29 +354,9 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
                         .title("" + place.getName())
                         .position(choosed_place));
 
-                // Format the place's details and display them in the TextView.
-                /**mPlaceDetailsText.setText(formatPlaceDetails(getResources(), place.getName(),
-                 place.getAddress(), place.getPhoneNumber(),
-                 place.getWebsiteUri()));
-
-                 // Display attributions if required.
-                 CharSequence attributions = place.getAttributions();
-                 if (!TextUtils.isEmpty(attributions)) {
-                 mPlaceAttribution.setText(Html.fromHtml(attributions.toString()));
-                 } else {
-                 mPlaceAttribution.setText("");
-                 }
-                 } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                 Status status = PlaceAutocomplete.getStatus(this, data);
-                 Log.e(TAG, "Error: Status = " + status.toString());
-                 } else if (resultCode == RESULT_CANCELED) {
-                 // Indicates that the activity closed before a selection was made. For example if
-                 // the user pressed the back button.
-                 }**/
-
                 if (requestCode == SEND_ADDRESS) {
                     place_info = formatPlaceDetails(getResources(), place.getName(),
-                            place.getAddress(), place.getPhoneNumber());
+                            place.getAddress());
                 }
             }
         }
@@ -430,8 +365,8 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
     /**
      * Helper method to format information about a place nicely.
      */
-    private static Spanned formatPlaceDetails(Resources res, CharSequence name, CharSequence address, CharSequence phoneNumber) {
-        Log.e(TAG, res.getString(R.string.place_details, name, address, phoneNumber));
-        return Html.fromHtml(res.getString(R.string.place_details, name, address, phoneNumber));
+    private static Spanned formatPlaceDetails(Resources res, CharSequence name, CharSequence address) {
+        Log.e(TAG, res.getString(R.string.place_details, name, address));
+        return Html.fromHtml(res.getString(R.string.place_details, name, address));
     }
 }

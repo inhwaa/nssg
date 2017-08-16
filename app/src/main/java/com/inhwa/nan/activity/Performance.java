@@ -11,6 +11,9 @@ public class Performance {
     private String pdate;
     private String ptime;
 
+    private int count;
+    private boolean userLiked;
+
     public Performance() {
     }
 
@@ -62,4 +65,5 @@ public class Performance {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }
