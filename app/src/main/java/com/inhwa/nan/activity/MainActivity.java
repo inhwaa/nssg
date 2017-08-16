@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity
             // 탈퇴
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -226,5 +225,4 @@ public class MainActivity extends AppCompatActivity
             return mFragmentTitleList.get(position);
         }
     }
-
 }

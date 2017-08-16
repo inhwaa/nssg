@@ -58,7 +58,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="AIzaSyC1bFf6nmcHC-q_-GCqSCSYY_Ag7NnqobE"/>
 
         <activity
             android:name="com.inhwa.nan.activity.UploadPerformanceActivity"
