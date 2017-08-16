@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,6 +47,8 @@ import com.inhwa.nan.app.AppController;
 import com.inhwa.nan.helper.SQLiteHandler;
 import com.inhwa.nan.helper.SessionManager;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,7 +78,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
     private Button btnSetTime;
     private Spinner spinnerSetGenre, spinnerSetRegion;
 
-    private EditText edtSetLocation;
     private EditText edtKeyword;
 
     private EditText edtIntroPerformance;
@@ -83,20 +86,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
 
     private Button btnUpload;
     private Button btnCancel, btnMap;
-
-    private String Title;
-
-    GoogleMap map;
-    private GoogleMap mMap;
-    private MapView mMapView;
-    private GoogleApiClient mGoogleApiClient;
-    private Location mLastKnownLocation;
-
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-
-    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
-
-    private static final int GET_ADDRESS = 3;
 
     private String place_info = "";
 
@@ -110,6 +99,11 @@ public class UploadPerformanceActivity extends AppCompatActivity{
 
     int s_year, s_month, s_day, s_hour, s_min; //selected play day and time
     int year, month, day, hour, min; //to initialize the date
+
+    private Bitmap bitmap;
+    private String image;
+
+    private int PICK_IMAGE_REQUEST = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -163,7 +157,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 s_genre = spinnerSetGenre.getSelectedItem().toString();
             }
-
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -173,7 +166,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 s_region = spinnerSetRegion.getSelectedItem().toString();
             }
-
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
@@ -182,7 +174,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
             public void onClick(View v) {
                 albumAction();
             }
-
         });
 
         btnSetDate.setOnClickListener(new View.OnClickListener() {
@@ -201,8 +192,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
 
         btnUpload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) { //공연 업로드
-                //  Title = edtSetTitle.getText().toString();
-
                 String title = edtSetTitle.getText().toString();
                 String date = date_view.getText().toString();
                 String time = time_view.getText().toString();
@@ -280,17 +269,19 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         return super.onCreateDialog(id);
     }
 
-    //method to select the image
+    boolean isAlbum = false;
+
     private void albumAction() {
-        Intent albumIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
         albumIntent.setType("image/*");
-        albumIntent.putExtra("crop", "false");
+        albumIntent.putExtra("crop", "true");
+        albumIntent.putExtra("aspectX", 1);
+        albumIntent.putExtra("aspectY", 1);
         albumIntent.putExtra("outputX", 300);
-        albumIntent.putExtra("outputY", 420);
+        albumIntent.putExtra("outputY", 300);
+        albumIntent.putExtra("return-data", true);
 
-        albumIntent.putExtra("return-data", false);
-
-        startActivityForResult(albumIntent, 2);
+        startActivityForResult(Intent.createChooser(albumIntent, "Select Image From Gallery"), PICK_IMAGE_REQUEST);
     }
 
     @Override
@@ -299,12 +290,23 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         /**if (resultCode != RESULT_OK) {
          return;
          }**/
-        if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
-            Bundle extras = data.getExtras();
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data.getData() != null) {
+
+            Uri filePath = data.getData();
+            try {
+                //Getting the Bitmap from Gallery
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                //Setting the Bitmap to ImageView
+                poster_view.setImageBitmap(bitmap);
+                image = getStringImage(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+           /** Bundle extras = data.getExtras();
             Bitmap image = extras.getParcelable("data");
 
             poster_view.setImageBitmap(image);
-            btnSetImage.setVisibility(View.INVISIBLE);
+            btnSetImage.setVisibility(View.INVISIBLE);**/
         }
 
         if (resultCode == 0) {
@@ -314,6 +316,14 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 mPlaceDetailsText.setText(data.getStringExtra("place_info"));
             }
         }
+    }
+
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     private void uploadPerformance(final String title, final String date, final String time, final String genre, final String region,
@@ -368,6 +378,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 params.put("location", location);
                 params.put("content", content);
                 params.put("email", email);
+                if (image!=null) params.put("image", image);
 
                 return params;
             }

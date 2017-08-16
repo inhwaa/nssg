@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-=======
       <module fileurl="file://$PROJECT_DIR$/Nan.iml" filepath="$PROJECT_DIR$/Nan.iml" />
->>>>>>> 99f47dbcc05f949a296762ecc6684b11f861b8c1
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/nssg.iml" filepath="$PROJECT_DIR$/nssg.iml" />
     </modules>

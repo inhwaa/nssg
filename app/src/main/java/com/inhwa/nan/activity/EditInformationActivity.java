@@ -56,7 +56,7 @@ public class EditInformationActivity extends Activity {
 
     final int CHOICE = 1;
 
-    private Bitmap bitmap, capture_bitmap;
+    private Bitmap bitmap;
     private String image;
 
     private TextView tv_name;
