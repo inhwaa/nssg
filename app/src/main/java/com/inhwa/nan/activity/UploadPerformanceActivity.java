@@ -62,7 +62,6 @@ import java.util.Map;
 
 public class UploadPerformanceActivity extends AppCompatActivity{
 
-
     public static String s_genre = "";
     public static String s_region = "";
     public static String s_email;
@@ -197,7 +196,8 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 String time = time_view.getText().toString();
                 String genre = s_genre;
                 String region = s_region;
-                String location = mPlaceDetailsText.getText().toString();
+                String location = "공연장주소";
+                // String location = mPlaceDetailsText.getText().toString();
                 String keyword = edtKeyword.getText().toString();
                 String content = edtIntroPerformance.getText().toString();
                 String email = s_email;
@@ -206,7 +206,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||content.matches("")) {
                     Toast.makeText(getApplicationContext(), "모든 항목을 입력하세요", Toast.LENGTH_LONG).show();
                 } else {
-                    uploadPerformance(title, date, time, genre, region, location, content, email);
+                    uploadPerformance(title, date, time, genre, region, location, content, email, image);
                     Toast.makeText(getApplicationContext(), "업로드.", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -302,11 +302,11 @@ public class UploadPerformanceActivity extends AppCompatActivity{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-           /** Bundle extras = data.getExtras();
-            Bitmap image = extras.getParcelable("data");
+            /** Bundle extras = data.getExtras();
+             Bitmap image = extras.getParcelable("data");
 
-            poster_view.setImageBitmap(image);
-            btnSetImage.setVisibility(View.INVISIBLE);**/
+             poster_view.setImageBitmap(image);
+             btnSetImage.setVisibility(View.INVISIBLE);**/
         }
 
         if (resultCode == 0) {
@@ -327,7 +327,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
     }
 
     private void uploadPerformance(final String title, final String date, final String time, final String genre, final String region,
-                                   final String location, final String content, final String email) {
+                                   final String location, final String content, final String email, final String image) {
 
         String tag_string_req = "req_uploadPerformance";
         StringRequest strReq = new StringRequest(Request.Method.POST,

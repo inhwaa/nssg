@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity
     private SQLiteHandler db;
     private SessionManager session;
 
+    NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +73,16 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ViewPager viewPager = (ViewPager)findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabs = (TabLayout)findViewById(R.id.tabs);
+        tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if(verify.equals("0")) {
+        if (verify.equals("0")) {
             fab.hide();
-        }
-        else {
+        } else {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -98,14 +99,14 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
 
         // NavigationView에 회원정보 받아오기
-        TextView nav_real = (TextView)header.findViewById(R.id.nav_real);
-        TextView nav_email = (TextView)header.findViewById(R.id.nav_email);
-        TextView nav_sub = (TextView)header.findViewById(R.id.nav_sub);
-        ImageView nav_image = (ImageView)header.findViewById(R.id.nav_image);
+        TextView nav_real = (TextView) header.findViewById(R.id.nav_real);
+        TextView nav_email = (TextView) header.findViewById(R.id.nav_email);
+        TextView nav_sub = (TextView) header.findViewById(R.id.nav_sub);
+        ImageView nav_image = (ImageView) header.findViewById(R.id.nav_image);
 
         nav_real.setText(name);
         nav_email.setText(email);
@@ -113,13 +114,21 @@ public class MainActivity extends AppCompatActivity
         Picasso.with(getApplicationContext()).invalidate("");
         Picasso.with(this).load(image).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(nav_image);
+
+        // verify값 0은 일반 사용자, 1은 아티스트
+        if (verify.equals("1")) {
+            hideItem("modify");
+        } else if (verify.equals("0")){
+            hideItem("upload");
+            hideItem("artist_modify");
+        }
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     /**
      * Logging out the user. Will set isLoggedIn flag to false in shared
      * preferences Clears the user data from sqlite users table
-     * */
+     */
     private void logoutUser() {
         session.setLogin(false);
 
@@ -169,12 +178,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         if (id == R.id.nav_modify) {
-            // 내 정보 변경
+            // 일반 사용자 정보 변경
             Intent intent2 = new Intent(MainActivity.this, EditInformationActivity.class);
             startActivity(intent2);
-        } else if (id == R.id.nav_scrap) {
+        } else if (id == R.id.nav_modifyArtist) {
+            // 아티스트 정보 변경
+            Intent intent = new Intent(MainActivity.this, EditInformationArtistActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_scrap) {
             // 스크랩한 공연
 
         } else if (id == R.id.nav_upload) {
@@ -189,15 +203,25 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_quit) {
             // 탈퇴
-
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    public void hideItem(String menu_id) {
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        Menu nav_Menu = navigationView.getMenu();
+        if(menu_id == "modify") {
+            nav_Menu.findItem(R.id.nav_modify).setVisible(false);
+        } else if(menu_id == "artist_modify"){
+            nav_Menu.findItem(R.id.nav_modifyArtist).setVisible(false);
+        }else if(menu_id == "upload"){
+            nav_Menu.findItem(R.id.nav_upload).setVisible(false);
+        }
+    }
+
     private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter =  new Adapter(getSupportFragmentManager());
+        Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new ListByRegionFragment(), "지역으로 찾기");
         adapter.addFragment(new ListOfGenreFragment(), "장르로 찾기");
         viewPager.setAdapter(adapter);
@@ -221,7 +245,7 @@ public class MainActivity extends AppCompatActivity
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title){
+        public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
