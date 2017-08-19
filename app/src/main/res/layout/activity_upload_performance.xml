@@ -36,9 +36,10 @@
             android:layout_height="40dp"
             android:scaleType="fitXY"
             android:background="@drawable/ic_camera2"
-            android:layout_marginBottom="209dp"
-            android:layout_alignBottom="@+id/btnSetImage"
-            android:layout_centerHorizontal="true" />
+            android:layout_marginBottom="15dp"
+            android:layout_above="@+id/edtSetTitle"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="14dp" />
 
         <EditText
             android:background="@drawable/border"
