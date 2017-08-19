@@ -165,16 +165,6 @@ public class EditInformationActivity extends Activity {
         }
         return super.onCreateDialog(id);
     }
-    private static final int ACTION_TAKE_PHOTO_B = 1;
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_TAKE_PHOTO = 2;
-    static final int REQUEST_IMAGE_CROP = 3;
-    Uri photoURI;
-
-    String mCurrentPhotoPath;
-
-    boolean isAlbum = false;
 
     private void albumAction() {
         Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
