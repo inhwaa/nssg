@@ -3,22 +3,18 @@ package com.inhwa.nan.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.icu.text.RelativeDateTimeFormatter;
-import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
 
 import java.util.List;
@@ -38,6 +34,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         public TextView genre;
         public TextView pdate;
         public TextView ptime;
+        public ImageView image;
 
         public MyViewHolder(View view) {
             super(view);
@@ -46,13 +43,14 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             genre = (TextView) view.findViewById(R.id.card_genre);
             pdate = (TextView) view.findViewById(R.id.card_date);
             ptime = (TextView) view.findViewById(R.id.card_time);
+            image = (ImageView) view.findViewById(R.id.card_image);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                    intent.putExtra(PerformanceDetailActivity.EXTRA_POSITION, getAdapterPosition());
+                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
                     context.startActivity(intent);
                 }
             });
@@ -101,7 +99,6 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                     }
                 }
             });
-
         }
     }
 
@@ -126,9 +123,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         holder.genre.setText(performance.getGenre());
         holder.pdate.setText(performance.getPdate());
         holder.ptime.setText(performance.getPtime());
-
-//        // loading album cover using Glide library
-//        Glide.with(mContext).load(album.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(performance.getImage()).into(holder.image);
     }
 
     @Override
