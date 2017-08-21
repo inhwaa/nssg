@@ -103,12 +103,17 @@ public class EditInformationArtistActivity extends Activity {
         tv_email.setText(email);
         edit_nickname.setText(sub_name);
 
-
         // 이미지 session
         Picasso.with(getApplicationContext()).invalidate("");
         Picasso.with(this).load(image).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(profile);
         byteArrayOutputStream = new ByteArrayOutputStream();
+
+        change.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialog(CHOICE);
+            }
+        });
 
         modify.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -210,7 +215,6 @@ public class EditInformationArtistActivity extends Activity {
                             String imagepath = jObj.getString("imagepath");
                             db.updateUser(email, nickname, imagepath);
                         }
-
                         else {
                             HashMap<String, String> user = db.getUserDetails();
                             db.updateUser(email, nickname, user.get("image"));

@@ -5,16 +5,24 @@ package com.inhwa.nan.activity;
  */
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.inhwa.nan.R;
+import com.inhwa.nan.helper.SQLiteHandler;
+
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 
 public class PerformanceDetailActivity extends AppCompatActivity {
+    private SQLiteHandler db;
 
     public static final String PERFORMANCE = "performance";
     public TextView artist;
@@ -24,12 +32,24 @@ public class PerformanceDetailActivity extends AppCompatActivity {
     public TextView ptime;
     public TextView detail;
 
+    ImageView performance_image;
+    private Bitmap bitmap;
+    private String image;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // Fetching user details from SQLite
+        HashMap<String, String> user = db.getUserDetails();
+
+        String image = user.get("image");
 
         // Set Collapsing Toolbar layout to the screen
         CollapsingToolbarLayout collapsingToolbar =
@@ -38,7 +58,6 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
         Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
-
         collapsingToolbar.setTitle(p.getTitle());
 
 //        artist = (TextView)findViewById(R.id.performance_artist);
@@ -57,6 +76,14 @@ public class PerformanceDetailActivity extends AppCompatActivity {
 //        placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
 //
 //        placePictures.recycle();
+    }
+
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     @Override
