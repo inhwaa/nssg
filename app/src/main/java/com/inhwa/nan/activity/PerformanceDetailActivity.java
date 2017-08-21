@@ -22,7 +22,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 public class PerformanceDetailActivity extends AppCompatActivity {
-    private SQLiteHandler db;
 
     public static final String PERFORMANCE = "performance";
     public TextView artist;
@@ -32,24 +31,12 @@ public class PerformanceDetailActivity extends AppCompatActivity {
     public TextView ptime;
     public TextView detail;
 
-    ImageView performance_image;
-    private Bitmap bitmap;
-    private String image;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        // Fetching user details from SQLite
-        HashMap<String, String> user = db.getUserDetails();
-
-        String image = user.get("image");
 
         // Set Collapsing Toolbar layout to the screen
         CollapsingToolbarLayout collapsingToolbar =
@@ -58,6 +45,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
         Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
+
         collapsingToolbar.setTitle(p.getTitle());
 
 //        artist = (TextView)findViewById(R.id.performance_artist);
@@ -78,14 +66,6 @@ public class PerformanceDetailActivity extends AppCompatActivity {
 //        placePictures.recycle();
     }
 
-    public String getStringImage(Bitmap bmp) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -99,4 +79,3 @@ public class PerformanceDetailActivity extends AppCompatActivity {
 
 
 }
-
