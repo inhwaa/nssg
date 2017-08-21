@@ -107,7 +107,6 @@ public class EditInformationActivity extends Activity {
         tv_email = (TextView) findViewById(R.id.emailEt);
         edit_nickname = (EditText) findViewById(R.id.nnEt);
 
-
         tv_name.setText(name);
         tv_email.setText(email);
         edit_nickname.setText(sub_name);
