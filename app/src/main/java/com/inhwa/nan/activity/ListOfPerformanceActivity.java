@@ -165,13 +165,15 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
                                 String title = performance.getString("title");
+                                String content = performance.getString("content");
                                 String region = performance.getString("region");
                                 String genre = performance.getString("genre");
                                 String pdate = performance.getString("perform_date");
                                 String ptime = performance.getString("perform_time");
+                                String image = performance.getString("image");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(title, region, genre, pdate, ptime);
+                                Performance p = new Performance(title, content, region, genre, pdate, ptime, image);
                                 performanceList.add(p);
                             }
                             adapter.notifyDataSetChanged();
@@ -230,13 +232,15 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
                                 String title = performance.getString("title");
+                                String content = performance.getString("content");
                                 String region = performance.getString("region");
                                 String genre = performance.getString("genre");
                                 String pdate = performance.getString("perform_date");
                                 String ptime = performance.getString("perform_time");
+                                String image = performance.getString("image");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(title, region, genre, pdate, ptime);
+                                Performance p = new Performance(title, content, region, genre, pdate, ptime, image);
                                 performanceList.add(p);
                             }
 

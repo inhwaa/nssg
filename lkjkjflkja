@@ -1,0 +1,100 @@
+[33mcommit 76d101b542d740e9599f37353e9c6dd73dce7327[m[33m ([m[1;36mHEAD -> [m[1;32msona[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: f3e520f c3261a7
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 16 19:41:10 2017 +0900
+
+    Merge branch 'sky'
+
+[33mcommit c3261a784304ca79c9243159bd22c1ccdf5f437d[m
+Merge: faf9638 99f47db
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 16 19:40:39 2017 +0900
+
+    merge
+
+[33mcommit f3e520f1e64b3b00f0ac240e6a8249681bc7eeb4[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 16 19:37:50 2017 +0900
+
+    hide fab
+
+[33mcommit 99f47dbcc05f949a296762ecc6684b11f861b8c1[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Wed Aug 16 19:34:08 2017 +0900
+
+    downloadthis
+
+[33mcommit 259144a9029c1833b1c5cad21513b868b5359828[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:46:02 2017 +0900
+
+    module
+
+[33mcommit e5347247629b79aff32152491a615bbf5dd9a234[m
+Merge: 313e4d6 13aee51
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:42:30 2017 +0900
+
+    Merge branch 'sona' of https://github.com/inhwaa/nssg
+
+[33mcommit 313e4d6f54f3eb5eed0137b57bd0701fc16523a2[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:42:20 2017 +0900
+
+    modify module
+
+[33mcommit a41e986eaf2ed3f583370f92d0dc0ff7cbd23e76[m
+Merge: faf9638 e53f8bd
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:36:22 2017 +0900
+
+    Merge branch 'sky' of https://github.com/inhwaa/nssg
+
+[33mcommit e53f8bda3f822fdaa6388ef24fdf8a4bf9248c79[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sun Aug 13 16:28:17 2017 +0900
+
+    shit
+
+[33mcommit 13aee517e44027301472b7a4c915b25cf5d05751[m[33m ([m[1;31morigin/sona[m[33m)[m
+Author: Sona <jang_sona@naver.com>
+Date:   Sun Aug 13 16:02:11 2017 +0900
+
+    아티스트 등록 및 인증 완료
+
+[33mcommit 0688992d9daaa825766ee4d1dec04c0a8bec8e94[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sun Aug 13 15:02:45 2017 +0900
+
+    mapplz..
+
+[33mcommit faf9638da3875f85cbbffa1c35c35781663ae192[m
+Merge: 3c12f75 09d78b3
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 14:24:20 2017 +0900
+
+    merge
+
+[33mcommit 3c12f75a1e782229148bb108d87bc463d5f301b2[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 14:17:12 2017 +0900
+
+    UploadPerformanceActivity 캘린더 현재날짜,시간으로 초기화
+
+[33mcommit 09d78b3e70eced465db7591b162ce015a9ac0010[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sun Aug 13 13:52:38 2017 +0900
+
+    addmap
+
+[33mcommit 42d0d3cc383ee6eeb27245921530d833d0fd023d[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Thu Aug 10 01:46:15 2017 +0900
+
+    Create README.md
+
+[33mcommit c9dd18d17f148c57f65aecd8ada9d0299cd0e8c5[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Thu Aug 10 01:10:27 2017 +0900
+
+    initial commit

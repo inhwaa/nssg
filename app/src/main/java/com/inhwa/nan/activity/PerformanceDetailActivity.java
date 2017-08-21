@@ -5,20 +5,31 @@ package com.inhwa.nan.activity;
  */
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.inhwa.nan.R;
+import com.inhwa.nan.helper.SQLiteHandler;
 
-/**
- * Provides UI for the Detail page with Collapsing Toolbar.
- */
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
+
 public class PerformanceDetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_POSITION = "position";
+    public static final String PERFORMANCE = "performance";
+    public TextView artist;
+    public TextView region;
+    public TextView genre;
+    public TextView pdate;
+    public TextView ptime;
+    public TextView detail;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,24 +39,26 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Set Collapsing Toolbar layout to the screen
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         // Set title of Detail page
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
-        int postion = getIntent().getIntExtra(EXTRA_POSITION, 0);
-        Resources resources = getResources();
+        Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
 
-        String[] performance_title = resources.getStringArray(R.array.performance);
-        collapsingToolbar.setTitle(performance_title[postion % performance_title.length]);
+        collapsingToolbar.setTitle(p.getTitle());
 
-//        String[] placeDetails = resources.getStringArray(R.array.place_details);
-//        TextView placeDetail = (TextView) findViewById(R.id.place_detail);
-//        placeDetail.setText(placeDetails[postion % placeDetails.length]);
-//
-//        String[] placeLocations = resources.getStringArray(R.array.place_locations);
-//        TextView placeLocation =  (TextView) findViewById(R.id.place_location);
-//        placeLocation.setText(placeLocations[postion % placeLocations.length]);
-//
+//        artist = (TextView)findViewById(R.id.performance_artist);
+        pdate = (TextView)findViewById(R.id.performance_date);
+        ptime = (TextView)findViewById(R.id.performance_time);
+        region = (TextView)findViewById(R.id.performance_location);
+        detail = (TextView)findViewById(R.id.performance_detail);
+
+        pdate.setText(p.getPdate());
+        ptime.setText(p.getPtime());
+        region.setText(p.getRegion());
+        detail.setText(p.getContent());
+
 //        TypedArray placePictures = resources.obtainTypedArray(R.array.places_picture);
 //        ImageView placePicutre = (ImageView) findViewById(R.id.image);
 //        placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
@@ -63,4 +76,6 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -3,7 +3,6 @@ package com.inhwa.nan.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,43 +46,33 @@ import java.util.Map;
 import static android.content.ContentValues.TAG;
 
 /**
- * Created by luvthemoon on 2017. 6. 26..
+ * Created by luvthemoon on 2017. 8. 19..
  */
 
-public class EditInformationActivity extends Activity {
-
-    final Context context = this;
-    final int CHOICE = 1;
-
-    private Bitmap bitmap;
-    private String image;
-
-    private TextView tv_name;
-    private TextView tv_email;
-    private EditText edit_nickname;
-
-    private ProgressDialog pDialog;
-
-    Button cancel, modify;
-    ImageButton change;
-    ImageView profile;
-
-    //Uri photoURI, albumURI = null;
-    Boolean album = false;
+public class EditInformationArtistActivity extends Activity {
 
     private SQLiteHandler db;
     private SessionManager session;
 
+    private Bitmap bitmap;
+    private String image;
+    ImageButton change;
+    ImageView profile;
     ByteArrayOutputStream byteArrayOutputStream;
 
-    boolean check = true;
+    final Context context = this;
+    final int CHOICE = 1;
 
-    private int PICK_IMAGE_REQUEST = 1;
+    private TextView tv_name;
+    private TextView tv_email;
+    private EditText edit_nickname, edit_intro;
+
+    Button cancel, modify;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editinfo);
+        setContentView(R.layout.activity_editinfo_artist);
 
         session = new SessionManager(getApplicationContext());
 
@@ -93,30 +82,31 @@ public class EditInformationActivity extends Activity {
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
 
-        String name = user.get("name");
+        String artistname = user.get("artistname");
         String email = user.get("email");
-        String sub_name = user.get("sub_name");
+        String introduction = user.get("introduction");
         String image = user.get("image");
+        String sub_name = user.get("sub_name");
 
         profile = (ImageView) findViewById(R.id.imageV);
-        modify = (Button) findViewById(R.id.btnModify);
-        cancel = (Button) findViewById(R.id.btnCancel2);
         change = (ImageButton) findViewById(R.id.changeImg);
 
         tv_name = (TextView) findViewById(R.id.nameEt);
         tv_email = (TextView) findViewById(R.id.emailEt);
         edit_nickname = (EditText) findViewById(R.id.nnEt);
+        edit_intro = (EditText) findViewById(R.id.introEt);
 
-        tv_name.setText(name);
+        modify = (Button) findViewById(R.id.btnModify);
+        cancel = (Button) findViewById(R.id.btnCancel2);
+
+        tv_name.setText(artistname);
         tv_email.setText(email);
         edit_nickname.setText(sub_name);
+
+        // 이미지 session
         Picasso.with(getApplicationContext()).invalidate("");
         Picasso.with(this).load(image).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(profile);
-
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
-
         byteArrayOutputStream = new ByteArrayOutputStream();
 
         change.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +154,8 @@ public class EditInformationActivity extends Activity {
         }
         return super.onCreateDialog(id);
     }
+
+    private int PICK_IMAGE_REQUEST = 1;
 
     private void albumAction() {
         Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -223,7 +215,6 @@ public class EditInformationActivity extends Activity {
                             String imagepath = jObj.getString("imagepath");
                             db.updateUser(email, nickname, imagepath);
                         }
-
                         else {
                             HashMap<String, String> user = db.getUserDetails();
                             db.updateUser(email, nickname, user.get("image"));
@@ -262,7 +253,3 @@ public class EditInformationActivity extends Activity {
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 }
-
-
-
-
