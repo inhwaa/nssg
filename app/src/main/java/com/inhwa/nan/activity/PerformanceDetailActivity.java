@@ -30,30 +30,32 @@ public class PerformanceDetailActivity extends AppCompatActivity {
     public TextView pdate;
     public TextView ptime;
     public TextView detail;
+    public TextView title;
+    private SQLiteHandler db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Set Collapsing Toolbar layout to the screen
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        // Set title of Detail page
-        // collapsingToolbar.setTitle(getString(R.string.item_title));
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // Fetching user details from SQLite
+        HashMap<String, String> user = db.getUserDetails();
+
+        String image = user.get("image");
 
         Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
 
-        collapsingToolbar.setTitle(p.getTitle());
-
 //        artist = (TextView)findViewById(R.id.performance_artist);
-        pdate = (TextView)findViewById(R.id.performance_date);
-        ptime = (TextView)findViewById(R.id.performance_time);
-        region = (TextView)findViewById(R.id.performance_location);
-        detail = (TextView)findViewById(R.id.performance_detail);
+        title = (TextView) findViewById(R.id.performance_title);
+        pdate = (TextView) findViewById(R.id.performance_date);
+        ptime = (TextView) findViewById(R.id.performance_time);
+        region = (TextView) findViewById(R.id.performance_location);
+        detail = (TextView) findViewById(R.id.performance_detail);
 
+        title.setText(p.getTitle());
         pdate.setText(p.getPdate());
         ptime.setText(p.getPtime());
         region.setText(p.getRegion());

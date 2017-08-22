@@ -50,7 +50,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
-   // public static final String EXTRA
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

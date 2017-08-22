@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -80,7 +81,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 }
             });
 
-            final ImageButton like_Button = (ImageButton) itemView.findViewById(R.id.like_button);
+            final CheckBox like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
             like_Button.setOnClickListener(new View.OnClickListener() {
                 int like_count = 0;
 
@@ -88,10 +89,10 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 public void onClick(View v) {
                     if (like_count == 0) {
                         Snackbar.make(v, "좋아요를 눌렀습니다.", Snackbar.LENGTH_SHORT).show();
-                        like_Button.setColorFilter(Color.RED);
+                        //like_Button.setColorFilter(Color.RED);
                         like_count++;
                     } else if (like_count == 1) {
-                        like_Button.setColorFilter(Color.GRAY);
+                       // like_Button.setColorFilter(Color.GRAY);
                         like_count--;
                     }
                 }
@@ -116,7 +117,6 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             });
         }
     }
-
 
     public PerformanceAdapter(Context mContext, List<Performance> albumList) {
         this.mContext = mContext;
