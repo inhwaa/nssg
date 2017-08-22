@@ -25,5 +25,11 @@ public class AppConfig {
 	// Server user edit profile url
 	public static String URL_EDIT_PROFILE = "http://220.230.122.180/edit_profile.php";
 
+	// Server artist edit profile url
+	public static String URL_EDIT_ARTIST_PROFILE = "http://220.230.122.180/edit_artist_profile.php";
+
+    // Server artist info url
+    public static String URL_DOWNLOAD_ARTIST = "http://220.230.122.180/download_artist.php";
+
 	public static String URL_REGISTER_ARTIST2 = "http://220.230.122.180/register_artist2.php";
 }

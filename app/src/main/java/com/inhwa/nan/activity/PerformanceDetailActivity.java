@@ -58,19 +58,12 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         ptime.setText(p.getPtime());
         region.setText(p.getRegion());
         detail.setText(p.getContent());
-
-//        TypedArray placePictures = resources.obtainTypedArray(R.array.places_picture);
-//        ImageView placePicutre = (ImageView) findViewById(R.id.image);
-//        placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
-//
-//        placePictures.recycle();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
                 finish();
                 return true;
         }
