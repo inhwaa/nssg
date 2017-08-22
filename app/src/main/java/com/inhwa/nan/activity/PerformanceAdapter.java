@@ -27,6 +27,9 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
 
     private Context mContext;
     private List<Performance> performanceList;
+//    private List<Performance> myperformanceList;
+
+  //  final int  = 2;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -45,7 +48,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             ptime = (TextView) view.findViewById(R.id.card_time);
             image = (ImageView) view.findViewById(R.id.card_image);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+           itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
@@ -54,6 +57,18 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                     context.startActivity(intent);
                 }
             });
+
+       /*     itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
+                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, myperformanceList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });*/
+
+
 
             // Adding Snackbar to Action Button inside card
             Button button = (Button) itemView.findViewById(R.id.action_button);

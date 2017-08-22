@@ -26,4 +26,6 @@ public class AppConfig {
 	public static String URL_EDIT_PROFILE = "http://220.230.122.180/edit_profile.php";
 
 	public static String URL_REGISTER_ARTIST2 = "http://220.230.122.180/register_artist2.php";
+
+	public static String URL_MY_PERFORMANCE = "http://220.230.122.180/myperformance.php";
 }
