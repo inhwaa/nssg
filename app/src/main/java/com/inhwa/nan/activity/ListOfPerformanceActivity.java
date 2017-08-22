@@ -50,6 +50,7 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
+    // public static final String EXTRA
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,7 +71,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
         else if (selection==1){
             subject = resources.getStringArray(R.array.genre);
             imagesubject = resources.getStringArray(R.array.genre_picture);
-
         }
 
         initCollapsingToolbar();

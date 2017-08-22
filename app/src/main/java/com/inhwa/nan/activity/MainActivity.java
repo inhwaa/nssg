@@ -194,7 +194,6 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_upload) {
             // 업로드한 공연
-
         } else if (id == R.id.nav_pw) {
             // 비밀번호 찾기
 

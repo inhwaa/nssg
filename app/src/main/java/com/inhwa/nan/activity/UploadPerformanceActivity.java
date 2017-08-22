@@ -106,6 +106,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_upload_performance);
 
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -127,8 +128,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         hour = cal.get ( cal.HOUR_OF_DAY ) ;
         min = cal.get ( cal.MINUTE );
 
-        setContentView(R.layout.activity_upload_performance);
-
         edtSetTitle = (EditText) findViewById(R.id.edtSetTitle);
         poster_view = (ImageView) findViewById(R.id.btnSetImage);
         btnSetImage = (ImageButton) findViewById(R.id.imgbtn);
@@ -140,7 +139,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         spinnerSetRegion = (Spinner) findViewById(R.id.spinnerSetRegion);
 
         //edtSetLocation = (EditText) findViewById(R.id.edtSetLocation);
-        edtKeyword = (EditText) findViewById(R.id.edtKeyword);
         edtIntroPerformance = (EditText) findViewById(R.id.edtIntroPerformance);
 
         btnUpload = (Button) findViewById(R.id.btnUpload);
