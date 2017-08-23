@@ -55,6 +55,16 @@
             android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
+            android:name="com.inhwa.nan.activity.ListOfMyPerformanceActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name="com.inhwa.nan.activity.ListOfMyPerformanceDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
             android:name="com.inhwa.nan.activity.PerformanceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>
@@ -94,14 +104,17 @@
         <activity android:name="com.inhwa.nan.activity.MapsActivityCurrentPlace">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.inhwa.nan.activity.EditInformationArtistActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

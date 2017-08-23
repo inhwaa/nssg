@@ -65,7 +65,7 @@ public class EditInformationArtistActivity extends Activity {
 
     private TextView tv_name;
     private TextView tv_email;
-    private EditText edit_nickname, edit_intro;
+    private EditText edit_artistname, edit_intro;
 
     Button cancel, modify;
 
@@ -82,26 +82,26 @@ public class EditInformationArtistActivity extends Activity {
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
 
-        String artistname = user.get("artistname");
+        String name = user.get("name");
         String email = user.get("email");
-        String introduction = user.get("introduction");
         String image = user.get("image");
-        String sub_name = user.get("sub_name");
+        String artistname = user.get("sub_name");
 
         profile = (ImageView) findViewById(R.id.imageV);
         change = (ImageButton) findViewById(R.id.changeImg);
 
         tv_name = (TextView) findViewById(R.id.nameEt);
         tv_email = (TextView) findViewById(R.id.emailEt);
-        edit_nickname = (EditText) findViewById(R.id.nnEt);
+        edit_artistname = (EditText) findViewById(R.id.nnEt);
         edit_intro = (EditText) findViewById(R.id.introEt);
 
         modify = (Button) findViewById(R.id.btnModify);
         cancel = (Button) findViewById(R.id.btnCancel2);
 
-        tv_name.setText(artistname);
+        tv_name.setText(name);
         tv_email.setText(email);
-        edit_nickname.setText(sub_name);
+        edit_artistname.setText(artistname);
+        loadIntroduction(email);
 
         // 이미지 session
         Picasso.with(getApplicationContext()).invalidate("");
@@ -117,8 +117,7 @@ public class EditInformationArtistActivity extends Activity {
 
         modify.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                editProfile(tv_email.getText().toString(), edit_nickname.getText().toString());
+                editProfile(tv_email.getText().toString(), edit_artistname.getText().toString().replaceAll("\\p{Z}", ""), edit_intro.getText().toString());
             }
 
         });
@@ -166,7 +165,6 @@ public class EditInformationArtistActivity extends Activity {
         albumIntent.putExtra("outputX", 300);
         albumIntent.putExtra("outputY", 300);
         albumIntent.putExtra("return-data", true);
-
         startActivityForResult(Intent.createChooser(albumIntent, "Select Image From Gallery"), PICK_IMAGE_REQUEST);
     }
 
@@ -174,9 +172,7 @@ public class EditInformationArtistActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("onActivityResult", "CALL");
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-
             Uri filePath = data.getData();
             try {
                 //Getting the Bitmap from Gallery
@@ -198,28 +194,69 @@ public class EditInformationArtistActivity extends Activity {
         return encodedImage;
     }
 
-    // load Profile to Server
-    private void editProfile(final String email, final String nickname) {
-        String tag_string_req = "req_editProfile";
-        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_EDIT_PROFILE, new Response.Listener<String>()
+    // load introduction from server
+    private void loadIntroduction(final String email) {
+        String tag_string_req = "req_introduction";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DOWNLOAD_ARTIST, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Register Response: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        edit_intro.setText(jObj.getString("introduction"));
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Update Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                //     hideDialog();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
 
+    // load Profile to Server
+    private void editProfile(final String email, final String artistname, final String introduction) {
+        String tag_string_req = "req_editArtistProfile";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_EDIT_ARTIST_PROFILE, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Register Response: " + response.toString());
                 try {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
                         if(image!=null) {
                             String imagepath = jObj.getString("imagepath");
-                            db.updateUser(email, nickname, imagepath);
+                            db.updateUser(email, artistname, imagepath);
                         }
                         else {
                             HashMap<String, String> user = db.getUserDetails();
-                            db.updateUser(email, nickname, user.get("image"));
+                            db.updateUser(email, artistname, user.get("image"));
                         }
-                        Toast.makeText(getApplicationContext(), "성공적으로 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "성공적으로 수정되었습니다.", Toast.LENGTH_LONG).show();
                         finish();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
@@ -234,8 +271,7 @@ public class EditInformationArtistActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Update Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 //     hideDialog();
             }
         }) {
@@ -244,7 +280,8 @@ public class EditInformationArtistActivity extends Activity {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
-                params.put("nickname", nickname);
+                params.put("artistname", artistname);
+                params.put("introduction", introduction);
                 if (image!=null) params.put("image", image);
                 return params;
             }

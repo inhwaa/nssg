@@ -189,7 +189,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 String region = s_region;
                 String location = "공연장주소";
                 // String location = mPlaceDetailsText.getText().toString();
-                String keyword = edtKeyword.getText().toString();
                 String content = edtIntroPerformance.getText().toString();
                 String email = s_email;
                 if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||content.matches("")) {
@@ -289,7 +288,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 //Setting the Bitmap to ImageView
                 poster_view.setImageBitmap(bitmap);
                 image = getStringImage(bitmap);
-                Toast.makeText(getApplicationContext(),image, Toast.LENGTH_LONG).show();
+               // Toast.makeText(getApplicationContext(),image, Toast.LENGTH_LONG).show();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -22,7 +22,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 public class PerformanceDetailActivity extends AppCompatActivity {
-    private SQLiteHandler db;
 
     public static final String PERFORMANCE = "performance";
     public TextView artist;
@@ -32,10 +31,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
     public TextView ptime;
     public TextView detail;
     public TextView title;
-
-    ImageView performance_image;
-    private Bitmap bitmap;
-    private String image;
+    private SQLiteHandler db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,7 +45,6 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
 
         String image = user.get("image");
-
 
         Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
 
@@ -65,31 +60,15 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         ptime.setText(p.getPtime());
         region.setText(p.getRegion());
         detail.setText(p.getContent());
-
-//        TypedArray placePictures = resources.obtainTypedArray(R.array.places_picture);
-//        ImageView placePicutre = (ImageView) findViewById(R.id.image);
-//        placePicutre.setImageDrawable(placePictures.getDrawable(postion % placePictures.length()));
-//
-//        placePictures.recycle();
-    }
-
-    public String getStringImage(Bitmap bmp) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
                 finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 }
-

@@ -128,7 +128,7 @@
             android:layout_alignParentRight="true"
             style="?android:attr/borderlessButtonStyle"
             android:tint="@color/button_grey" />
-        
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -137,6 +137,7 @@
             android:button="@drawable/chk_like"
             android:layout_alignBaseline="@+id/action_button"
             android:layout_alignBottom="@+id/action_button"
+            android:layout_toLeftOf="@id/share_button"
             android:layout_toEndOf="@+id/card_time" />
 
     </RelativeLayout>
