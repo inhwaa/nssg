@@ -60,8 +60,6 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
     private String email;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +71,6 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         position = getIntent().getIntExtra(EXTRA_POSITION, 0);
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
-
 
         initCollapsingToolbar();
 
@@ -94,17 +91,13 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
         // session manager
         session = new SessionManager(getApplicationContext());
-
-
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
 
         email = user.get("email").toString();
       //  String verify = user.get("verify");
 
-
         preparePerformances();
-
 
     }
 
@@ -215,10 +208,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                     return params;
                 }
             };
-
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-
-
     }
     /**
      * RecyclerView item decoration - give equal margin around grid item
@@ -245,5 +235,4 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
-
 }
