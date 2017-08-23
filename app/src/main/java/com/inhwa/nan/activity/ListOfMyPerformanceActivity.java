@@ -80,7 +80,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         performanceList = new ArrayList<>();
-        adapter = new PerformanceAdapter(this, performanceList);
+        adapter = new PerformanceAdapter(this, performanceList, 1);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -172,6 +172,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
+                                String PID = performance.getString("performance_no");
                                 String title = performance.getString("title");
                                 String content = performance.getString("content");
                                 String region = performance.getString("region");
@@ -181,7 +182,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                                 String image = performance.getString("image");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(title, content, region, genre, pdate, ptime, image); //수정삭제 가능한 페이지로 변경
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image); //수정삭제 가능한 페이지로 변경
                                 performanceList.add(p);
                             }
                             adapter.notifyDataSetChanged();

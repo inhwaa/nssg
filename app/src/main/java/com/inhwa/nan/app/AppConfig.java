@@ -34,4 +34,8 @@ public class AppConfig {
 	public static String URL_REGISTER_ARTIST2 = "http://220.230.122.180/register_artist2.php";
 
 	public static String URL_MY_PERFORMANCE = "http://220.230.122.180/myperformance.php";
+
+	public static String URL_EDIT_PEFORMANCE = "http://220.230.122.180/edit_performance.php";
+
+	public static String URL_DELETE_PEFORMANCE = "http://220.230.122.180/delete_performance.php";
 }

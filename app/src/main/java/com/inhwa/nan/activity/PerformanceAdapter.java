@@ -30,7 +30,9 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
     private List<Performance> performanceList;
 //    private List<Performance> myperformanceList;
 
-  //  final int  = 2;
+
+    public int VIEWTYPE;
+  //  private final static int MY_PERFORMANCE_VIEW = 1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -53,9 +55,16 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
-                    context.startActivity(intent);
+
+                    if(VIEWTYPE == 0) {
+                        Intent intent = new Intent(context, PerformanceDetailActivity.class);
+                        intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
+                        context.startActivity(intent);
+                    }else if(VIEWTYPE == 1){
+                        Intent intent = new Intent(context, UploadPerformanceActivity.class);
+                        intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
+                        context.startActivity(intent);
+                    }
                 }
             });
 
@@ -118,9 +127,12 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         }
     }
 
-    public PerformanceAdapter(Context mContext, List<Performance> albumList) {
+
+
+    public PerformanceAdapter(Context mContext, List<Performance> albumList, int viewtype) {
         this.mContext = mContext;
         this.performanceList = albumList;
+        VIEWTYPE = viewtype;
     }
 
     @Override
