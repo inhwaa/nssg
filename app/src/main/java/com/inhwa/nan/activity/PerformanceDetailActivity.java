@@ -60,6 +60,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         ptime.setText(p.getPtime());
         region.setText(p.getRegion());
         detail.setText(p.getContent());
+        //string performance_no = p.getPID().toString(); performance_no 알고싶을때 하면 됨...아마도
     }
 
     @Override
@@ -71,6 +72,4 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

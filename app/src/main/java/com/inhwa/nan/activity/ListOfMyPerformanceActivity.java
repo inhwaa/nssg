@@ -43,20 +43,22 @@ import java.util.Map;
 
 public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
+
+    public static final String PERFORMANCE = "performance";
     private SQLiteHandler db;
     private SessionManager session;
 
     private RecyclerView recyclerView;
     private PerformanceAdapter adapter;
     private List<Performance> performanceList;
-   // private List<Performance> myperformanceList;
+    // private List<Performance> myperformanceList;
     private String[] subject;
     private String[] imagesubject;
     private int selection;
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
-   // public static final String EXTRA
+    // public static final String EXTRA
 
     private String email;
 
@@ -77,9 +79,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         performanceList = new ArrayList<>();
-        adapter = new PerformanceAdapter(this, performanceList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
+        adapter = new PerformanceAdapter(this, performanceList, 1);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(dpToPx(10)));
@@ -95,7 +98,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
 
         email = user.get("email").toString();
-      //  String verify = user.get("verify");
+        //  String verify = user.get("verify");
 
         preparePerformances();
 
@@ -105,7 +108,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
+                //                NavUtils.navigateUpFromSameTask(this);
                 finish();
                 return true;
         }
@@ -147,69 +150,71 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     private void preparePerformances() {
 
         // email로 찾기
-            String tag_string_req = "req_per_email";
+        String tag_string_req = "req_per_email";
 
-            StringRequest strReq = new StringRequest(Request.Method.POST,
-                    AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
 
-                @Override
-                public void onResponse(String response) {
+            @Override
+            public void onResponse(String response) {
 
-                    try {
-                        JSONObject jObj = new JSONObject(response);
-                        JSONArray jArry = jObj.getJSONArray("performances");
-                        boolean error = jObj.getBoolean("error");
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    JSONArray jArry = jObj.getJSONArray("performances");
+                    boolean error = jObj.getBoolean("error");
 
-                        // Check for error node in json
-                        if (!error) {
+                    // Check for error node in json
+                    if (!error) {
 
-                            for (int i = 0; i < jArry.length(); i++) {
-                                JSONObject performance = jArry.getJSONObject(i);
-                                String title = performance.getString("title");
-                                String content = performance.getString("content");
-                                String region = performance.getString("region");
-                                String genre = performance.getString("genre");
-                                String pdate = performance.getString("perform_date");
-                                String ptime = performance.getString("perform_time");
-                                String image = performance.getString("image");
+                        for (int i = 0; i < jArry.length(); i++) {
+                            JSONObject performance = jArry.getJSONObject(i);
+                            String PID = performance.getString("performance_no");
+                            String title = performance.getString("title");
+                            String content = performance.getString("content");
+                            String region = performance.getString("region");
+                            String genre = performance.getString("genre");
+                            String pdate = performance.getString("perform_date");
+                            String ptime = performance.getString("perform_time");
+                            String image = performance.getString("image");
 
-                                // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(title, content, region, genre, pdate, ptime, image); //수정삭제 가능한 페이지로 변경
-                                performanceList.add(p);
-                            }
-                            adapter.notifyDataSetChanged();
-
-                        } else {
-                            // Error in login. Get the error message
-                            String errorMsg = jObj.getString("error_msg");
-                            Toast.makeText(getApplicationContext(),
-                                    errorMsg, Toast.LENGTH_LONG).show();
+                            // Performance class 생성, 리스트에 추가한다.
+                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image); //수정삭제 가능한 페이지로 변경
+                            performanceList.add(p);
                         }
-                    } catch (JSONException e) {
-                        // JSON error
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
                     }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-            }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }) {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
 
-                @Override
-                protected Map<String, String> getParams() {
-                    // php 에 parameter 보내기
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("email", email);
+            @Override
+            protected Map<String, String> getParams() {
+                // php 에 parameter 보내기
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
 
-                    return params;
-                }
-            };
-            AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
     /**
      * RecyclerView item decoration - give equal margin around grid item
      */

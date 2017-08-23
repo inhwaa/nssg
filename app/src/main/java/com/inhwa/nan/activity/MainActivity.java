@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         String email = user.get("email");
         String sub_name = user.get("sub_name");
         String image = user.get("image");
-        String verify = user.get("verify");
+        String verify = user.get("verify"); //verify값 0은 일반 사용자, 1은 아티스트
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -80,8 +80,9 @@ public class MainActivity extends AppCompatActivity
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+        //플로팅 버튼, 공연을 업로드 할 수 있음
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (verify.equals("0")) {
+        if (verify.equals("0")) { // 사용자가 '일반 사용자(0)'일 때 플로팅 버튼 숨기기
             fab.hide();
         } else {
             fab.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +211,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    // 사용자 별로 메뉴를 구분하기 위한 함수
     public void hideItem(String menu_id) {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
