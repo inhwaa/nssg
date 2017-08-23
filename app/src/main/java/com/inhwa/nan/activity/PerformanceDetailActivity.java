@@ -91,7 +91,5 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
 
