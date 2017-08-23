@@ -31,6 +31,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
     public TextView ptime;
     public TextView detail;
     public TextView title;
+
     private SQLiteHandler db;
 
     @Override

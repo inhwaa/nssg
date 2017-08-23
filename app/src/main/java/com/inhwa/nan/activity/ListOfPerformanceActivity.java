@@ -202,7 +202,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     // php 에 parameter 보내기
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("region",subject[position % subject.length]);
-
                     return params;
                 }
             };

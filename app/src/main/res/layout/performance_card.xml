@@ -13,7 +13,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="490dp">
 
         <ImageView
             android:id="@+id/card_image"
@@ -26,118 +26,179 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_title_height"
             android:layout_alignBottom="@+id/card_image"
-            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/dark_grey" />
 
         <TextView
-            android:id="@+id/card_region"
-            android:text="장소"
+            android:id="@+id/card_region_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_image"
-            android:layout_marginLeft="@dimen/md_keylines"
-            android:layout_marginTop="@dimen/md_keylines"
-            android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/card_date_title"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="장소"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/article_subheading" />
+
+        <TextView
+            android:id="@+id/card_region"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/card_date_title"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginRight="@dimen/md_keyspaces"
+            android:layout_toRightOf="@+id/card_region_title"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
+            android:textSize="@dimen/article_subheading" />
+
+        <TextView
+            android:id="@+id/card_genre_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/card_date_title"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_toRightOf="@+id/card_region"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="장르"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/article_subheading" />
 
         <TextView
             android:id="@+id/card_genre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/card_date_title"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginRight="@dimen/md_keyspaces"
+            android:layout_toRightOf="@+id/card_genre_title"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="장르"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/article_subheading" />
+
+        <TextView
+            android:id="@+id/card_date_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_image"
-            android:layout_toRightOf="@+id/card_region"
-            android:layout_marginLeft="@dimen/md_keylines"
-            android:layout_marginTop="@dimen/md_keylines"
             android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginTop="@dimen/md_keylines"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textColor="@color/dark_grey"
+            android:text="날짜"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/article_subheading" />
 
         <TextView
             android:id="@+id/card_date"
-            android:text="날짜"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_image"
-            android:layout_toRightOf="@+id/card_genre"
-            android:layout_marginLeft="@dimen/md_keylines"
-            android:layout_marginTop="@dimen/md_keylines"
             android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginRight="@dimen/md_keyspaces"
+            android:layout_marginTop="@dimen/md_keylines"
+            android:layout_toRightOf="@+id/card_date_title"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
+            android:textSize="@dimen/article_subheading" />
+
+        <TextView
+            android:id="@+id/card_time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_image"
+            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginTop="@dimen/md_keylines"
+            android:layout_toRightOf="@+id/card_date"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="시간"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/article_subheading" />
 
         <TextView
             android:id="@+id/card_time"
-            android:text="시간"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_image"
-            android:layout_toRightOf="@+id/card_date"
-            android:layout_marginLeft="@dimen/md_keylines"
-            android:layout_marginTop="@dimen/md_keylines"
             android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginRight="@dimen/md_keyspaces"
+            android:layout_marginTop="@dimen/md_keylines"
+            android:layout_toRightOf="@+id/card_time_title"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading" />
 
         <TextView
-            android:id="@+id/card_price"
-            android:text="가격"
+            android:id="@+id/card_price_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_image"
-            android:layout_toRightOf="@+id/card_time"
-            android:layout_marginLeft="@dimen/md_keylines"
-            android:layout_marginTop="@dimen/md_keylines"
             android:layout_marginBottom="@dimen/md_keylines"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginTop="@dimen/md_keylines"
+            android:layout_toRightOf="@+id/card_time"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="가격"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/article_subheading" />
+
+        <TextView
+            android:id="@+id/card_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_image"
+            android:layout_marginBottom="@dimen/md_keylines"
+            android:layout_marginLeft="@dimen/md_keyspaces"
+            android:layout_marginRight="@dimen/md_keyspaces"
+            android:layout_marginTop="@dimen/md_keylines"
+            android:layout_toRightOf="@+id/card_price_title"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading" />
 
-        <Button
-            android:id="@+id/action_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/card_region"
-            style="?android:attr/borderlessButtonStyle"
-            android:textColor="?attr/colorPrimary"
-            android:text="Action" />
-
         <ImageButton
             android:id="@+id/share_button"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="@dimen/cards_button_width"
             android:layout_height="@dimen/cards_button_height"
-            android:layout_marginRight="@dimen/md_keylines"
-            app:srcCompat="@drawable/ic_share"
-            android:layout_below="@+id/card_region"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            style="?android:attr/borderlessButtonStyle"
-            android:tint="@color/button_grey" />
-        
+            android:layout_below="@+id/card_date_title"
+            android:tint="@color/button_grey"
+            app:srcCompat="@drawable/ic_share" />
+
         <CheckBox
+            android:id="@+id/chk_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chk_like"
-            android:layout_marginRight="@dimen/md_keylines"
-            android:button="@drawable/chk_like"
-            android:layout_alignBaseline="@+id/action_button"
-            android:layout_alignBottom="@+id/action_button"
-            android:layout_toEndOf="@+id/card_time" />
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/card_price"
+            android:layout_toStartOf="@+id/share_button"
+            android:button="@drawable/chk_like" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

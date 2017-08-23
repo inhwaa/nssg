@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,26 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
+import com.inhwa.nan.app.AppConfig;
+import com.inhwa.nan.app.AppController;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Inhwa_ on 2017-06-19.
@@ -31,6 +47,9 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
 //    private List<Performance> myperformanceList;
 
   //  final int  = 2;
+
+    public int like_count = 0;
+    public int scrap_count = 0;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
@@ -69,30 +88,16 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 }
             });*/
 
-
-
-            // Adding Snackbar to Action Button inside card
-            Button button = (Button) itemView.findViewById(R.id.action_button);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Action is pressed",
-                            Snackbar.LENGTH_LONG).show();
-                }
-            });
-
             final CheckBox like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
+            like_Button.setChecked(like_count == 1);
             like_Button.setOnClickListener(new View.OnClickListener() {
-                int like_count = 0;
-
                 @Override
                 public void onClick(View v) {
                     if (like_count == 0) {
                         Snackbar.make(v, "좋아요를 눌렀습니다.", Snackbar.LENGTH_SHORT).show();
-                        //like_Button.setColorFilter(Color.RED);
                         like_count++;
                     } else if (like_count == 1) {
-                       // like_Button.setColorFilter(Color.GRAY);
+                        Snackbar.make(v, "좋아요를 취소했습니다.", Snackbar.LENGTH_SHORT).show();
                         like_count--;
                     }
                 }
@@ -100,14 +105,11 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
 
             final ImageButton shareImageButton = (ImageButton) itemView.findViewById(R.id.share_button);
             shareImageButton.setOnClickListener(new View.OnClickListener() {
-                int scrap_count = 1;
-
                 @Override
                 public void onClick(View v) {
                     if (scrap_count == 1) {
                         Snackbar.make(v, "스크랩 되었습니다.", Snackbar.LENGTH_SHORT).show();
                         shareImageButton.setColorFilter(Color.YELLOW);
-
                         scrap_count--;
                     } else if (scrap_count == 0) {
                         shareImageButton.setEnabled(false);
@@ -139,6 +141,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         holder.pdate.setText(performance.getPdate());
         holder.ptime.setText(performance.getPtime());
         Glide.with(mContext).load(performance.getImage()).into(holder.image);
+        checkLikeState("pih0902@naver.com",50);
     }
 
     @Override
@@ -146,7 +149,47 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         return performanceList.size();
     }
 
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+    // Check like state
+    private void checkLikeState(final String email, final int performance_no) {
+        String tag_string_req = "req_likestate";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_CHECK_LIKE, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Register Response: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        Log.d(TAG, "like!" + jObj.getInt("like_state"));
+//                        if(jObj.getInt("like_state")==0) like_count=0;
+//                        else like_count=1;
+//                        Log.d(TAG, "like count " + like_count);
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Log.d(TAG, "errorMsg: " + errorMsg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "JSONException: " + e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Update Error: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("performance_no", String.valueOf(performance_no));
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 }
