@@ -43,6 +43,8 @@ import java.util.Map;
 
 public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
+
+    public static final String PERFORMANCE = "performance";
     private SQLiteHandler db;
     private SessionManager session;
 
@@ -60,8 +62,6 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
     private String email;
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,13 +74,14 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
 
-
         initCollapsingToolbar();
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         performanceList = new ArrayList<>();
-        adapter = new PerformanceAdapter(this, performanceList);
+
+        adapter = new PerformanceAdapter(this, performanceList, 1);
+
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -102,11 +103,8 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         email = user.get("email").toString();
       //  String verify = user.get("verify");
 
-
         preparePerformances();
 
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

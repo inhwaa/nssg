@@ -187,18 +187,33 @@
             android:layout_height="@dimen/cards_button_height"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+<<<<<<< HEAD
             android:layout_below="@+id/card_date_title"
             android:tint="@color/button_grey"
             app:srcCompat="@drawable/ic_share" />
+=======
+            style="?android:attr/borderlessButtonStyle"
+            android:tint="@color/button_grey" />
+>>>>>>> sky
 
         <CheckBox
             android:id="@+id/chk_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:layout_alignParentBottom="true"
             android:layout_below="@+id/card_price"
             android:layout_toStartOf="@+id/share_button"
             android:button="@drawable/chk_like" />
+=======
+            android:id="@+id/chk_like"
+            android:layout_marginRight="@dimen/md_keylines"
+            android:button="@drawable/chk_like"
+            android:layout_alignBaseline="@+id/action_button"
+            android:layout_alignBottom="@+id/action_button"
+            android:layout_toLeftOf="@id/share_button"
+            android:layout_toEndOf="@+id/card_time" />
+>>>>>>> sky
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

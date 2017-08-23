@@ -77,7 +77,7 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         performanceList = new ArrayList<>();
-        adapter = new PerformanceAdapter(this, performanceList);
+        adapter = new PerformanceAdapter(this, performanceList, 0);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(mLayoutManager);
