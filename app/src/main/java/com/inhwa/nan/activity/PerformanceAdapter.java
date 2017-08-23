@@ -46,11 +46,9 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
     private List<Performance> performanceList;
 //    private List<Performance> myperformanceList;
 
-
     public int like_count = 0;
     public int scrap_count = 0;
     public int VIEWTYPE;
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title;

@@ -100,6 +100,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
 
     private Bitmap bitmap;
     private String image;
+    private String performance_no;
 
     private int PICK_IMAGE_REQUEST = 1;
 
@@ -127,6 +128,11 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         day = cal.get ( cal.DATE ) ;
         hour = cal.get ( cal.HOUR_OF_DAY ) ;
         min = cal.get ( cal.MINUTE );
+
+        //실험
+        //Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
+        //performance_no = p.getPID().toString();
+        //Toast.makeText(getApplicationContext(), "PID =" + performance_no, Toast.LENGTH_SHORT).show();
 
         edtSetTitle = (EditText) findViewById(R.id.edtSetTitle);
         poster_view = (ImageView) findViewById(R.id.btnSetImage);
@@ -288,7 +294,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 //Setting the Bitmap to ImageView
                 poster_view.setImageBitmap(bitmap);
                 image = getStringImage(bitmap);
-               // Toast.makeText(getApplicationContext(),image, Toast.LENGTH_LONG).show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
