@@ -83,7 +83,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         adapter = new PerformanceAdapter(this, performanceList, 1);
 
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(dpToPx(10)));
@@ -101,21 +101,21 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
 
         email = user.get("email").toString();
-      //  String verify = user.get("verify");
+        //  String verify = user.get("verify");
 
         preparePerformances();
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
-                finish();
-                return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+    //                NavUtils.navigateUpFromSameTask(this);
+                    finish();
+                    return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
 
     /**
      * Initializing collapsing toolbar
