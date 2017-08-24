@@ -43,14 +43,11 @@ import static android.content.ContentValues.TAG;
 public class PerformanceDetailActivity extends AppCompatActivity {
 
     public static final String PERFORMANCE = "performance";
-<<<<<<< HEAD
-    public TextView artist, region, genre, pdate, ptime, detail, title, price;
-=======
 
->>>>>>> f9503f1ed24bbe40d878191f0afe2f313997c065
+    public TextView artist, region, genre, pdate, ptime, detail, title, price;
+
     private SQLiteHandler db;
 
-    public TextView artist, region, genre, pdate, ptime, detail, title;
     public ImageView poster;
 
     @Override
