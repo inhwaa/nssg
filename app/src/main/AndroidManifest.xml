@@ -60,14 +60,11 @@
             android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
-<<<<<<< HEAD
-=======
             android:name="com.inhwa.nan.activity.ListOfMyPerformanceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
->>>>>>> sky
             android:name="com.inhwa.nan.activity.PerformanceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>

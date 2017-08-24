@@ -105,6 +105,13 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onResume() {
+        preparePerformances();
+
+        super.onResume();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
