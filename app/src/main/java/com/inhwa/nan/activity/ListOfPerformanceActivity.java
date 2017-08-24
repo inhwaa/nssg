@@ -43,6 +43,9 @@ import java.util.Map;
 
 public class ListOfPerformanceActivity extends AppCompatActivity {
 
+    private SQLiteHandler db;
+    private SessionManager session;
+
     private RecyclerView recyclerView;
     private PerformanceAdapter adapter;
     private List<Performance> performanceList;
@@ -52,8 +55,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
-    private SQLiteHandler db;
-    private SessionManager session;
 
     private String email;
 
@@ -110,7 +111,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override

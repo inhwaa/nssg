@@ -78,6 +78,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         region.setText(p.getRegion());
         detail.setText(p.getContent());
         price.setText(p.getPrice()==0?"무료":String.valueOf(p.getPrice())+"원");
+
         //등록했던 공연 포스터 불러오기
         Picasso.with(this).load(p.getImage()).into(poster);
         //string performance_no = p.getPID().toString(); performance_no 알고싶을때 하면 됨...아마도

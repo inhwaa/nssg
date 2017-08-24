@@ -120,8 +120,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
             finish();
         }
         if (item.getItemId() == R.id.back) {
-           // Intent intent4 = new Intent(MapsActivityCurrentPlace.this, UploadPerformanceActivity.class);
-           // startActivity(intent4);
             finish();
         }
         return true;
@@ -272,7 +270,6 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
             mLastKnownLocation = LocationServices.FusedLocationApi
                     .getLastLocation(mGoogleApiClient);
         }
-
         // Set the map's camera position to the current location of the device.
         if (mCameraPosition != null) {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(mCameraPosition));

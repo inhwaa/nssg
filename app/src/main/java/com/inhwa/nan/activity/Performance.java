@@ -88,9 +88,7 @@ public class Performance implements Serializable {
         return pdate;
     }
 
-    public void setPdate(String pdate) {
-        this.pdate = pdate;
-    }
+    public void setPdate(String pdate) { this.pdate = pdate; }
 
     public String getPtime() {
         return ptime;

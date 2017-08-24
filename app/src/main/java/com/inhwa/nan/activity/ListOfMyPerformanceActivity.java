@@ -92,10 +92,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
         // session manager
         session = new SessionManager(getApplicationContext());
+
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
-
-        email = user.get("email").toString();
+        email = user.get("email");
 
         preparePerformances();
     }
@@ -144,6 +144,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     }
 
     private void preparePerformances() {
+
         // email로 찾기
         String tag_string_req = "req_per_email";
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -170,9 +171,13 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                             String ptime = performance.getString("perform_time");
                             String image = performance.getString("image");
                             String location = performance.getString("location");
+                            int like_state = performance.getInt("like_state");
+                            int scrap_state = performance.getInt("scrap_state");
+                            int artist_no = performance.getInt("artist_no");
+                            int price = performance.getInt("price");
 
                             // Performance class 생성, 리스트에 추가한다.
-                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, location); //수정삭제 가능한 페이지로 변경
+                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, scrap_state, location,  artist_no, price);
                             performanceList.add(p);
                         }
                         adapter.notifyDataSetChanged();
@@ -201,7 +206,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // php 에 parameter 보내기
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
+                params.put("email",email);
 
                 return params;
             }

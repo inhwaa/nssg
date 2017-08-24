@@ -238,7 +238,6 @@
                 android:background="@drawable/border"
                 android:hint="가격"
                 android:textAlignment="viewEnd" />
-
         </LinearLayout>
 
         <LinearLayout

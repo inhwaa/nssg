@@ -124,10 +124,8 @@ public class EditInformationArtistActivity extends Activity {
 
         cancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
                 finish();
             }
-
         });
     }
 

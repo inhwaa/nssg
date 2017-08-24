@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -74,11 +75,13 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
 
     private ImageView poster_view;
     private ImageButton img_change;
-    private EditText ptitle, detail, price;
+    private EditText ptitle, detail, pPrice;
     private TextView pdate, ptime, plocation;
     private Spinner genre, region;
 
     private Button btnTime, btnDate, btnCancel, btnModify, btnDelete, btnMap;
+
+    private CheckBox chk_like, chk_scrap;
 
     private String place_info = "";
 
@@ -130,7 +133,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         genre = (Spinner) findViewById(R.id.spinnerSetGenre);
         region = (Spinner) findViewById(R.id.spinnerSetRegion);
         plocation = (TextView) findViewById(R.id.place_details);
-        price = (EditText) findViewById(R.id.et_price);
+        pPrice = (EditText) findViewById(R.id.et_price);
 
         btnTime = (Button) findViewById(R.id.btnSetTime);
         btnDate = (Button) findViewById(R.id.btnSetDate);
@@ -138,6 +141,9 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnModify = (Button) findViewById(R.id.btnModify);
         btnMap = (Button) findViewById(R.id.btnMap);
+
+        chk_like = (CheckBox) findViewById(R.id.chk_like);
+        chk_scrap = (CheckBox) findViewById(R.id.chk_scrap);
 
         //업로드 한 공연 정보 불러오기
         ptitle.setText(p.getTitle());
@@ -147,6 +153,8 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         detail.setText(p.getContent());
         //genre.getSelectedItem(p.getContent());
         plocation.setText(p.getLocation());
+        pPrice.setText(p.getPrice()==0?"무료":String.valueOf(p.getPrice())+"원");
+
         img_change.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 albumAction();
@@ -192,6 +200,8 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 String location = plocation.getText().toString();
                 String content = detail.getText().toString();
                 String email = s_email;
+                int price = Integer.parseInt(pPrice.getText().toString());
+
                 deletePerformance(PID);
                 Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
@@ -209,10 +219,12 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 String location = plocation.getText().toString();
                 String content = detail.getText().toString();
                 String email = s_email;
+                int price = Integer.parseInt(pPrice.getText().toString());
+
                 if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||content.matches("")) {
                     Toast.makeText(getApplicationContext(), "모든 항목을 입력하세요", Toast.LENGTH_LONG).show();
                 } else {
-                    editPerformance(title, date, time, genre, region, location, content, email);
+                    editPerformance(title, date, time, genre, region, location, content, email, price);
                     Toast.makeText(getApplicationContext(), "업로드.", Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -302,7 +314,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
     }
 
     private void editPerformance(final String title, final String date, final String time, final String genre, final String region,
-                                   final String location, final String content, final String email) {
+                                   final String location, final String content, final String email, final int price) {
 
         String tag_string_req = "req_editPerformance";
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_EDIT_PEFORMANCE, new Response.Listener<String>() {
@@ -348,6 +360,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 params.put("location", location);
                 params.put("content", content);
                 params.put("image", image);
+                params.put("price", String.valueOf(price));
                 return params;
             }
         };

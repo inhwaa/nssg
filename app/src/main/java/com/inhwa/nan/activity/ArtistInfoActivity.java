@@ -38,14 +38,10 @@ public class ArtistInfoActivity extends AppCompatActivity {
 
     public static final String ARTIST_NO = "artist_no";
 
-    private SQLiteHandler db;
-    private SessionManager session;
     private int artist_no;
 
     ImageView profile;
     TextView artist_name, artist_intro;
-
-    ByteArrayOutputStream byteArrayOutputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +55,6 @@ public class ArtistInfoActivity extends AppCompatActivity {
         artist_intro = (TextView) findViewById(R.id.tv_artistintro);
 
         loadIntroduction(artist_no);
-
     }
 
     // load introduction from server
