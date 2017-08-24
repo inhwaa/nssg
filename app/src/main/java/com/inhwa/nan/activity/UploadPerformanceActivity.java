@@ -67,7 +67,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
     public static String s_email;
     private static final String TAG = UploadPerformanceActivity.class.getSimpleName();
 
-    private EditText edtSetTitle;
+    private EditText edtSetTitle,edtPrice;
 
     private TextView date_view, time_view;
 
@@ -136,6 +136,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         //Toast.makeText(getApplicationContext(), "PID =" + performance_no, Toast.LENGTH_SHORT).show();
 
         edtSetTitle = (EditText) findViewById(R.id.edtSetTitle);
+        edtPrice = (EditText)findViewById(R.id.et_price);
         poster_view = (ImageView) findViewById(R.id.btnSetImage);
         btnSetImage = (ImageButton) findViewById(R.id.imgbtn);
         date_view = (TextView) findViewById(R.id.date_tv);
@@ -198,10 +199,12 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 // String location = mPlaceDetailsText.getText().toString();
                 String content = edtIntroPerformance.getText().toString();
                 String email = s_email;
+                int price = Integer.parseInt(edtPrice.getText().toString());
+
                 if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||content.matches("")) {
                     Toast.makeText(getApplicationContext(), "모든 항목을 입력하세요", Toast.LENGTH_LONG).show();
                 } else {
-                    uploadPerformance(title, date, time, genre, region, location, content, email);
+                    uploadPerformance(title, date, time, genre, region, location, content, email, price);
                     Toast.makeText(getApplicationContext(), "업로드.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
@@ -242,7 +245,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                         s_day = dayOfMonth;
                         date_view.setText(s_year + "/" + s_month + "/" + s_day);
                     }
-                        }, year, month, day); //오늘 날짜로 초기화 하고싶다
+                           }, year, month, day); //오늘 날짜로 초기화 하고싶다
                 return dpd;
 
             case DIALOG_TIME:
@@ -309,7 +312,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
     }
 
     private void uploadPerformance(final String title, final String date, final String time, final String genre, final String region,
-                                   final String location, final String content, final String email) {
+                                   final String location, final String content, final String email, final int price) {
 
         String tag_string_req = "req_uploadPerformance";
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_UPLOAD_PERFORMANCE, new Response.Listener<String>() {
@@ -356,6 +359,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 params.put("content", content);
                 params.put("email", email);
                 params.put("image", image);
+                params.put("price", String.valueOf(price));
                 return params;
             }
         };

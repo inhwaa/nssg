@@ -17,8 +17,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_profile2" />
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:gravity="center"
@@ -29,11 +28,9 @@
             android:layout_marginTop="15dp"
             android:textSize="30sp"
             android:textStyle="bold"
-            android:text="데이식스"
             android:textColor="@color/colorAccent"/>
 
         <TextView
-            android:text="wowoww"
             android:textSize="20sp"
             android:padding="8dp"
             android:id="@+id/tv_artistintro"

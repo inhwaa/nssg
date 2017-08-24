@@ -65,6 +65,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         public TextView price;
         public ImageView image;
         public CheckBox like_Button;
+        public ImageButton scrapButton;
         public int pid = 0;
         public String email;
 
@@ -78,6 +79,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             image = (ImageView) view.findViewById(R.id.card_image);
             price = (TextView) view.findViewById(R.id.card_price);
             like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
+            scrapButton = (ImageButton) itemView.findViewById(R.id.share_button);
 
             // SqLite database handler
             db = new SQLiteHandler(view.getContext());
@@ -118,17 +120,16 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 }
             });
 
-            final ImageButton shareImageButton = (ImageButton) itemView.findViewById(R.id.share_button);
-            shareImageButton.setOnClickListener(new View.OnClickListener() {
+            final ImageButton scrapButton = (ImageButton) itemView.findViewById(R.id.share_button);
+            scrapButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (scrap_count == 1) {
+                    if (scrapButton.getColorFilter().equals(Color.YELLOW)) {
                         Snackbar.make(v, "스크랩 되었습니다.", Snackbar.LENGTH_SHORT).show();
-                        shareImageButton.setColorFilter(Color.YELLOW);
-                        scrap_count--;
-                    } else if (scrap_count == 0) {
-                        shareImageButton.setEnabled(false);
-                        Snackbar.make(v, "이미 스크랩 되었습니다.", Snackbar.LENGTH_SHORT).show();
+                        scrapButton.setColorFilter(Color.GRAY);
+                    } else {
+                        Snackbar.make(v, "스크랩을 취소했습니다.", Snackbar.LENGTH_SHORT).show();
+                        scrapButton.setColorFilter(Color.YELLOW);
                     }
                 }
             });
@@ -159,6 +160,8 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         holder.price.setText(performance.getPrice()==0?"무료":String.valueOf(performance.getPrice())+"원");
         Glide.with(mContext).load(performance.getImage()).into(holder.image);
         holder.like_Button.setChecked(performance.getLike_state()==1);
+        if(performance.getScrap_state()==1) holder.scrapButton.setColorFilter(Color.YELLOW);
+        else holder.scrapButton.setColorFilter(Color.GRAY);
         holder.pid = performance.getPID();
     }
     @Override

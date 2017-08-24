@@ -137,7 +137,7 @@ public class RegisterActivity extends Activity {
                         String verify = user.getString("verify");
 
                         // Inserting row in users table
-                        db.addUser(name, email, uid, created_at, "nickname", "image.com", verify);
+                        db.addUser(name, email, uid, created_at, "닉네임", "http://220.230.122.180/uploads/default.png", verify);
 
                         Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다. 로그인해주세요.", Toast.LENGTH_LONG).show();
 
@@ -178,7 +178,6 @@ public class RegisterActivity extends Activity {
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
-
                 return params;
             }
         };
