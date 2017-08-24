@@ -58,10 +58,14 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
     private String email;
 
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_performance_list);
+    }
+
+    protected void onResume() {
+        super.onResume();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,7 +115,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
      * Initializing collapsing toolbar
      * Will show and hide the toolbar title on scroll
      */
-   private void initCollapsingToolbar() {
+    private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("내가 업로드한 공연");

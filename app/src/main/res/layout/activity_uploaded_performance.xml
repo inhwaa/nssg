@@ -5,13 +5,13 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <ImageView
@@ -127,21 +127,23 @@
                     android:id="@+id/genre_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
                     android:text="장르"
+                    android:textColor="#000000"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
                 <Spinner
-                    android:gravity="center_vertical|center"
-                    android:background="@drawable/border"
-                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/spinnerSetGenre"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginRight="5dp"
-                    android:entries="@array/genre" />
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:entries="@array/genre"
+                    android:gravity="center_vertical|center" />
 
             </LinearLayout>
 
@@ -152,24 +154,26 @@
                 android:layout_marginBottom="30dp">
 
                 <TextView
+                    android:textColor="#000000"
                     android:id="@+id/region_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
                     android:text="지역"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
                 <Spinner
-                    android:gravity="center_vertical|center"
-                    android:background="@drawable/border"
-                    android:layout_weight="1"
-                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
                     android:id="@+id/spinnerSetRegion"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:entries="@array/region" />
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:entries="@array/region"
+                    android:gravity="center_vertical|center" />
 
             </LinearLayout>
 
@@ -180,26 +184,58 @@
 
                 <Button
                     android:layout_weight="1"
-                    android:id="@+id/findMap_button"
+                    android:id="@+id/btnMap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginRight="40dp"
                     android:text="주소 수정"
-                    android:layout_marginRight="8dp"
                     android:backgroundTint="@color/white"/>
 
                 <TextView
                     android:id="@+id/place_details"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_weight="13"
-                    android:padding="5dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/border"/>
+                    android:layout_weight="20"
+                    android:background="@drawable/border"
+                    android:hint="상세 주소"
+                    android:padding="5dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout4"
+                android:layout_weight="1">
+
+                <TextView
+                    android:textColor="#000000"
+                    android:id="@+id/price_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="2"
+                    android:text="가격"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/et_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:hint="가격"
+                    android:textAlignment="viewEnd" />
 
             </LinearLayout>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/linearLayout2"

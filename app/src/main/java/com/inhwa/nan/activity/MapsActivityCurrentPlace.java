@@ -120,8 +120,9 @@ public class MapsActivityCurrentPlace extends AppCompatActivity
             finish();
         }
         if (item.getItemId() == R.id.back) {
-            Intent intent4 = new Intent(MapsActivityCurrentPlace.this, UploadPerformanceActivity.class);
-            startActivity(intent4);
+           // Intent intent4 = new Intent(MapsActivityCurrentPlace.this, UploadPerformanceActivity.class);
+           // startActivity(intent4);
+            finish();
         }
         return true;
     }

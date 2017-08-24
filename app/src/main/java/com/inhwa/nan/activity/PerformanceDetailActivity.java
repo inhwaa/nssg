@@ -7,6 +7,7 @@ package com.inhwa.nan.activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ import com.inhwa.nan.R;
 import com.inhwa.nan.app.AppConfig;
 import com.inhwa.nan.app.AppController;
 import com.inhwa.nan.helper.SQLiteHandler;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +43,15 @@ import static android.content.ContentValues.TAG;
 public class PerformanceDetailActivity extends AppCompatActivity {
 
     public static final String PERFORMANCE = "performance";
+<<<<<<< HEAD
     public TextView artist, region, genre, pdate, ptime, detail, title, price;
+=======
+
+>>>>>>> f9503f1ed24bbe40d878191f0afe2f313997c065
     private SQLiteHandler db;
+
+    public TextView artist, region, genre, pdate, ptime, detail, title;
+    public ImageView poster;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,7 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         region = (TextView) findViewById(R.id.performance_location);
         detail = (TextView) findViewById(R.id.performance_detail);
         price = (TextView) findViewById(R.id.performance_price);
+        poster = (ImageView) findViewById(R.id.iv_poster);
 
         title.setText(p.getTitle());
         pdate.setText(p.getPdate());
@@ -71,6 +81,8 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         region.setText(p.getRegion());
         detail.setText(p.getContent());
         price.setText(p.getPrice()==0?"무료":String.valueOf(p.getPrice())+"원");
+        //등록했던 공연 포스터 불러오기
+        Picasso.with(this).load(p.getImage()).into(poster);
         //string performance_no = p.getPID().toString(); performance_no 알고싶을때 하면 됨...아마도
 
         final int artist_no = p.getArtist_no();
