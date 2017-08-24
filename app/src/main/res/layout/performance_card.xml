@@ -190,10 +190,7 @@
             android:layout_below="@+id/card_date_title"
             android:tint="@color/button_grey"
             app:srcCompat="@drawable/ic_share" />
-<<<<<<< HEAD
-=======
 
->>>>>>> 1e92948fede9d6c40d8181f21006261bd71ee8cd
         <CheckBox
             android:id="@+id/chk_like"
             android:layout_width="wrap_content"
@@ -202,10 +199,6 @@
             android:layout_below="@+id/card_price"
             android:layout_toStartOf="@+id/share_button"
             android:button="@drawable/chk_like" />
-<<<<<<< HEAD
-
-=======
->>>>>>> 1e92948fede9d6c40d8181f21006261bd71ee8cd
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
