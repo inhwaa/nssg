@@ -43,22 +43,18 @@ import java.util.Map;
 
 public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
-
-    public static final String PERFORMANCE = "performance";
     private SQLiteHandler db;
     private SessionManager session;
 
     private RecyclerView recyclerView;
     private PerformanceAdapter adapter;
     private List<Performance> performanceList;
-   // private List<Performance> myperformanceList;
     private String[] subject;
     private String[] imagesubject;
     private int selection;
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
-   // public static final String EXTRA
 
     private String email;
 
@@ -76,12 +72,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
         initCollapsingToolbar();
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
         performanceList = new ArrayList<>();
-
         adapter = new PerformanceAdapter(this, performanceList, 1);
 
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -94,33 +88,30 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
         // session manager
         session = new SessionManager(getApplicationContext());
-
-
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
 
         email = user.get("email").toString();
-        //  String verify = user.get("verify");
 
         preparePerformances();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //                NavUtils.navigateUpFromSameTask(this);
+                finish();
+                return true;
         }
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case android.R.id.home:
-    //                NavUtils.navigateUpFromSameTask(this);
-                    finish();
-                    return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /**
      * Initializing collapsing toolbar
      * Will show and hide the toolbar title on scroll
      */
-    private void initCollapsingToolbar() {
+   private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("내가 업로드한 공연");
@@ -149,75 +140,72 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     }
 
     private void preparePerformances() {
-
         // email로 찾기
-            String tag_string_req = "req_per_email";
 
-            StringRequest strReq = new StringRequest(Request.Method.POST,
-                    AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
+        String tag_string_req = "req_per_email";
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+        AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
 
-                @Override
-                public void onResponse(String response) {
+            @Override
+            public void onResponse(String response) {
 
-                    try {
-                        JSONObject jObj = new JSONObject(response);
-                        JSONArray jArry = jObj.getJSONArray("performances");
-                        boolean error = jObj.getBoolean("error");
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    JSONArray jArry = jObj.getJSONArray("performances");
+                    boolean error = jObj.getBoolean("error");
 
-                        // Check for error node in json
-                        if (!error) {
+                    // Check for error node in json
+                    if (!error) {
+                        for (int i = 0; i < jArry.length(); i++) {
+                            JSONObject performance = jArry.getJSONObject(i);
+                            int PID = performance.getInt("performance_no");
+                            String title = performance.getString("title");
+                            String content = performance.getString("content");
+                            String region = performance.getString("region");
+                            String genre = performance.getString("genre");
+                            String pdate = performance.getString("perform_date");
+                            String ptime = performance.getString("perform_time");
+                            String image = performance.getString("image");
+                            String location = performance.getString("location");
 
-                            for (int i = 0; i < jArry.length(); i++) {
-                                JSONObject performance = jArry.getJSONObject(i);
-                                int PID = performance.getInt("performance_no");
-                                String title = performance.getString("title");
-                                String content = performance.getString("content");
-                                String region = performance.getString("region");
-                                String genre = performance.getString("genre");
-                                String pdate = performance.getString("perform_date");
-                                String ptime = performance.getString("perform_time");
-                                String image = performance.getString("image");
-
-                                // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image); //수정삭제 가능한 페이지로 변경
-                                performanceList.add(p);
-                            }
-                            adapter.notifyDataSetChanged();
-
-                        } else {
-                            // Error in login. Get the error message
-                            String errorMsg = jObj.getString("error_msg");
-                            Toast.makeText(getApplicationContext(),
-                                    errorMsg, Toast.LENGTH_LONG).show();
+                            // Performance class 생성, 리스트에 추가한다.
+                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, location); //수정삭제 가능한 페이지로 변경
+                            performanceList.add(p);
                         }
-                    } catch (JSONException e) {
-                        // JSON error
-                        e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        adapter.notifyDataSetChanged();
+
+                    } else {
+                        // Error in login. Get the error message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
                     }
+                } catch (JSONException e) {
+                    // JSON error
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-            }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
 
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            }) {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
 
-                @Override
-                protected Map<String, String> getParams() {
-                    // php 에 parameter 보내기
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("email", email);
+            @Override
+            protected Map<String, String> getParams() {
+                // php 에 parameter 보내기
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
 
-                    return params;
-                }
-            };
-
-            AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
-
-
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
     /**
      * RecyclerView item decoration - give equal margin around grid item
      */
@@ -243,5 +231,4 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
-
 }

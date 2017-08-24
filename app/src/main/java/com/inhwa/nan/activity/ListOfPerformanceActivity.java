@@ -186,10 +186,13 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 String pdate = performance.getString("perform_date");
                                 String ptime = performance.getString("perform_time");
                                 String image = performance.getString("image");
+                                String location = performance.getString("location");
                                 int like_state = performance.getInt("like_state");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state);
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location);
+
+
                                 performanceList.add(p);
                             }
                             adapter.notifyDataSetChanged();
@@ -213,7 +216,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }) {
-
                 @Override
                 protected Map<String, String> getParams() {
                     // php 에 parameter 보내기
@@ -223,7 +225,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     return params;
                 }
             };
-
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
         }
         // genre로 찾기
@@ -254,13 +255,14 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 String pdate = performance.getString("perform_date");
                                 String ptime = performance.getString("perform_time");
                                 String image = performance.getString("image");
+                                String location = performance.getString("location");
                                 int like_state = performance.getInt("like_state");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state);
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location);
+
                                 performanceList.add(p);
                             }
-
                             adapter.notifyDataSetChanged();
 
                         } else {
@@ -276,14 +278,12 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     }
                 }
             }, new Response.ErrorListener() {
-
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getApplicationContext(),
                             error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }) {
-
                 @Override
                 protected Map<String, String> getParams() {
                     // php 에 parameter 보내기
@@ -294,7 +294,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     return params;
                 }
             };
-
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
         }
     }

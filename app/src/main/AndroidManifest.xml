@@ -97,6 +97,10 @@
             android:name="com.inhwa.nan.activity.EditInformationActivity"
             android:windowSoftInputMode="adjustPan"></activity>
 
+        <activity
+            android:name="com.inhwa.nan.activity.ArtistInfoActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.inhwa.nan"

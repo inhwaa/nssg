@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="?attr/colorPrimary"
-            android:text="@string/btn_register"
+            android:text="완료"
             android:textColor="@color/white" />
 
         <!-- Link to Login Screen -->

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -193,7 +194,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                 String time = time_view.getText().toString();
                 String genre = s_genre;
                 String region = s_region;
-                String location = "공연장주소";
+                String location = mPlaceDetailsText.getText().toString();
                 // String location = mPlaceDetailsText.getText().toString();
                 String content = edtIntroPerformance.getText().toString();
                 String email = s_email;

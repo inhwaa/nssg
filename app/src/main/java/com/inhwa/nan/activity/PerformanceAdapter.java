@@ -46,9 +46,11 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
 
     private Context mContext;
     private List<Performance> performanceList;
-//    private List<Performance> myperformanceList;
+
+    //    private List<Performance> myperformanceList;
     private SessionManager session;
     private SQLiteHandler db;
+
 
     public int like_count = 0;
     public int scrap_count = 0;
@@ -99,6 +101,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 }
             });
 
+            final CheckBox like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
             like_Button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -129,6 +132,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             });
         }
     }
+
 
     public PerformanceAdapter(Context mContext, List<Performance> performanceList, int viewtype) {
         this.mContext = mContext;

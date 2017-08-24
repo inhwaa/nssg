@@ -31,7 +31,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class RegisterActivity extends Activity {
 
     private static final String TAG = RegisterActivity.class.getSimpleName();
@@ -85,7 +84,7 @@ public class RegisterActivity extends Activity {
                     registerUser(name, email, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "Please enter your details!", Toast.LENGTH_LONG)
+                            "정보를 입력해주세요.", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -101,7 +100,6 @@ public class RegisterActivity extends Activity {
                 finish();
             }
         });
-
     }
 
     /**
@@ -141,7 +139,7 @@ public class RegisterActivity extends Activity {
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at, "nickname", "image.com", verify);
 
-                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다. 로그인해주세요.", Toast.LENGTH_LONG).show();
 
                         // Launch login activity
                         Intent intent = new Intent(
@@ -183,7 +181,6 @@ public class RegisterActivity extends Activity {
 
                 return params;
             }
-
         };
 
         // Adding request to request queue

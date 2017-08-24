@@ -16,14 +16,16 @@ public class Performance implements Serializable {
     private String ptime;
     private String image;
     private int like_state;
+    private String location;
+
     private int count;
     private boolean userLiked;
 
     public Performance() {
     }
 
-    public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image) {
 
+    public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image, String location) {
         this.PID = PID;
         this.title = title;
         this.content = content;
@@ -32,9 +34,10 @@ public class Performance implements Serializable {
         this.pdate = pdate;
         this.ptime = ptime;
         this.image = image;
+        this.location = location;
     }
 
-    public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image, int like_state) {
+    public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image, int like_state, String location) {
 
         this.PID = PID;
         this.title = title;
@@ -99,7 +102,13 @@ public class Performance implements Serializable {
 
     public void setImage(String image) { this.image = image; }
 
+
     public int getLike_state() { return like_state; }
 
     public void setLike_state(int like_state) { this.like_state = like_state; }
+
+    public String getLocation() {return location;}
+
+    public void setLocation(String location) { this.location = location;}
+
 }

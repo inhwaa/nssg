@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         nav_real.setText(name);
         nav_email.setText(email);
         nav_sub.setText(sub_name);
+
         Picasso.with(getApplicationContext()).invalidate("");
         Picasso.with(this).load(image).memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE).into(nav_image);
@@ -191,10 +192,10 @@ public class MainActivity extends AppCompatActivity
             // 아티스트 정보 변경
             Intent intent = new Intent(MainActivity.this, EditInformationArtistActivity.class);
             startActivity(intent);
-        }else if (id == R.id.nav_scrap) {
+        }/**else if (id == R.id.nav_scrap) {
             // 스크랩한 공연
 
-        } else if (id == R.id.nav_upload) {
+        }**/ else if (id == R.id.nav_upload) {
             // 업로드한 공연
             Intent intent = new Intent(MainActivity.this, ListOfMyPerformanceActivity.class);
             startActivity(intent);
@@ -204,7 +205,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_logout) {
             // 로그아웃
             logoutUser();
-
         } else if (id == R.id.nav_quit) {
             // 탈퇴
         }
@@ -254,7 +254,6 @@ public class MainActivity extends AppCompatActivity
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

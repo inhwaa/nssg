@@ -60,8 +60,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="3"
-                    android:text="Name"
+                    android:layout_weight="2"
+                    android:text="이름"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -88,8 +88,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="3"
-                    android:text="Email"
+                    android:layout_weight="2"
+                    android:text="이메일"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -116,8 +116,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="3"
-                    android:text="Artistname"
+                    android:layout_weight="2"
+                    android:text="아티스트 명"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -141,8 +141,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:layout_weight="3"
-                    android:text="Intro"
+                    android:layout_weight="2"
+                    android:text="아티스트 소개"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
