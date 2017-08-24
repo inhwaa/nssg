@@ -51,21 +51,12 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
     private SessionManager session;
     private SQLiteHandler db;
 
-
-    public int like_count = 0;
-    public int scrap_count = 0;
     public int VIEWTYPE;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public TextView region;
-        public TextView genre;
-        public TextView pdate;
-        public TextView ptime;
-        public TextView price;
+        public TextView title,region,genre,pdate,ptime,price,like_freq,scrap_freq;
         public ImageView image;
         public CheckBox like_Button, scrap_Button;
-        public ImageButton scrapButton;
         public int pid = 0;
         public String email;
 
@@ -80,6 +71,8 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             price = (TextView) view.findViewById(R.id.card_price);
             like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
             scrap_Button = (CheckBox) itemView.findViewById(R.id.chk_scrap);
+            like_freq = (TextView)view.findViewById(R.id.card_like);
+            scrap_freq = (TextView)view.findViewById(R.id.card_scrap);
 
             // SqLite database handler
             db = new SQLiteHandler(view.getContext());
@@ -111,10 +104,12 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 public void onClick(View v) {
                     if ( like_Button.isChecked() ) {
                         addLike(email, pid);
+                        like_freq.setText(String.valueOf(Integer.parseInt(scrap_freq.getText().toString())+1));
                         Snackbar.make(v, "좋아요를 눌렀습니다.", Snackbar.LENGTH_SHORT).show();
                     }
                     else {
                         deleteLike(email, pid);
+                        like_freq.setText(String.valueOf(Integer.parseInt(like_freq.getText().toString())-1));
                         Snackbar.make(v, "좋아요를 취소했습니다.", Snackbar.LENGTH_SHORT).show();
                     }
                 }
@@ -124,11 +119,13 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 @Override
                 public void onClick(View v) {
                     if (scrap_Button.isChecked()) {
+                        addScrap(email, pid);
+                        scrap_freq.setText(String.valueOf(Integer.parseInt(scrap_freq.getText().toString())+1));
                         Snackbar.make(v, "스크랩 되었습니다.", Snackbar.LENGTH_SHORT).show();
-                        //scrapButton.setColorFilter(Color.GRAY);
                     } else {
+                        deleteScrap(email, pid);
+                        scrap_freq.setText(String.valueOf(Integer.parseInt(scrap_freq.getText().toString())-1));
                         Snackbar.make(v, "스크랩을 취소했습니다.", Snackbar.LENGTH_SHORT).show();
-                        //scrapButton.setColorFilter(Color.YELLOW);
                     }
                 }
             });
@@ -158,9 +155,10 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         holder.ptime.setText(performance.getPtime());
         holder.price.setText(performance.getPrice()==0?"무료":String.valueOf(performance.getPrice())+"원");
         Glide.with(mContext).load(performance.getImage()).into(holder.image);
+        holder.like_freq.setText(String.valueOf(performance.getLike_freq()));
+        holder.scrap_freq.setText(String.valueOf(performance.getScrap_freq()));
         holder.like_Button.setChecked(performance.getLike_state()==1);
-        //if(performance.getScrap_state()==1) holder.scrap_Button.setChecked(Color.YELLOW);
-       // else holder.scrap_Button.setColorFilter(Color.GRAY);
+        holder.scrap_Button.setChecked(performance.getScrap_state()==1);
         holder.pid = performance.getPID();
     }
     @Override

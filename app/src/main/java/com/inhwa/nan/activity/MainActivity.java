@@ -196,10 +196,11 @@ public class MainActivity extends AppCompatActivity
             // 아티스트 정보 변경
             Intent intent = new Intent(MainActivity.this, EditInformationArtistActivity.class);
             startActivity(intent);
-        }/**else if (id == R.id.nav_scrap) {
-         // 스크랩한 공연
-
-         }**/
+        }else if (id == R.id.nav_scrap) {
+             // 스크랩한 공연
+             Intent intent = new Intent(MainActivity.this, ListOfScrapPerformanceActivity.class);
+             startActivity(intent);
+         }
         else if (id == R.id.nav_upload) {
             // 업로드한 공연
             Intent intent = new Intent(MainActivity.this, ListOfMyPerformanceActivity.class);

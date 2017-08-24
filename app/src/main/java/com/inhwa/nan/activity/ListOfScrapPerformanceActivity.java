@@ -14,14 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
 import com.inhwa.nan.app.AppConfig;
 import com.inhwa.nan.app.AppController;
@@ -41,7 +39,7 @@ import java.util.Map;
  * Created by Inhwa_ on 2017-06-19.
  */
 
-public class ListOfMyPerformanceActivity extends AppCompatActivity {
+public class ListOfScrapPerformanceActivity extends AppCompatActivity {
 
     private SQLiteHandler db;
     private SessionManager session;
@@ -73,8 +71,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         position = getIntent().getIntExtra(EXTRA_POSITION, 0);
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
-
-        initCollapsingToolbar();
+        
 
         performanceList = new ArrayList<>();
         adapter = new PerformanceAdapter(this, performanceList, 1);
@@ -111,37 +108,6 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Initializing collapsing toolbar
-     * Will show and hide the toolbar title on scroll
-     */
-    private void initCollapsingToolbar() {
-        final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("업로드한 공연");
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        appBarLayout.setExpanded(true);
-
-        // hiding & showing the title when toolbar expanded & collapsed
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle("업로드한 공연");
-                    isShow = true;
-                } else if (isShow) {
-                    collapsingToolbar.setTitle("업로드한 공연");
-                    isShow = false;
-                }
-            }
-        });
-    }
 
     private void preparePerformances() {
         // email로 찾기

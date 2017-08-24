@@ -86,7 +86,7 @@
             android:layout_toRightOf="@+id/card_genre_title"
             android:ellipsize="end"
             android:singleLine="true"
-            android:text="장르"
+            android:text=""
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading" />
 
@@ -182,25 +182,48 @@
             android:textColor="@color/dark_grey"
             android:textSize="@dimen/article_subheading" />
 
-        <CheckBox
-            android:id="@+id/chk_scrap"
+        <TextView
+            android:id="@+id/card_scrap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="@dimen/md_keyspaces"
             android:layout_below="@+id/card_date_title"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/article_subheading" />
+
+        <CheckBox
+            android:id="@+id/chk_scrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/card_date_title"
+            android:layout_toLeftOf="@+id/card_scrap"
             android:button="@drawable/chk_scrap"/>
+
+        <TextView
+            android:id="@+id/card_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/md_keyspaces"
+            android:ellipsize="end"
+            android:textColor="@color/dark_grey"
+            android:textSize="@dimen/article_subheading"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/chk_scrap"
+            android:layout_alignTop="@+id/chk_scrap" />
 
         <CheckBox
             android:id="@+id/chk_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:layout_alignParentBottom="true"
-            android:layout_below="@+id/card_price"
-            android:layout_toStartOf="@+id/chk_scrap"
-            android:button="@drawable/chk_like" />
+            android:layout_toLeftOf="@+id/card_like"
+            android:button="@drawable/chk_like"
+            android:layout_alignTop="@+id/chk_scrap" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>
