@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
 import com.squareup.picasso.Picasso;
 
@@ -80,7 +81,7 @@ public class ListByRegionFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Picasso.with(context).load(mRegionPictures[position % mRegionPictures.length]).fit().into(ViewHolder.picture);
+            Glide.with(context).load(mRegionPictures[position % mRegionPictures.length]).into(ViewHolder.picture);
             holder.name.setText("#"+mRegions[position % mRegions.length]);
         }
 

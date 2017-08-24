@@ -26,6 +26,8 @@ import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
 import com.inhwa.nan.app.AppConfig;
 import com.inhwa.nan.app.AppController;
+import com.inhwa.nan.helper.SQLiteHandler;
+import com.inhwa.nan.helper.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +47,8 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
     private Context mContext;
     private List<Performance> performanceList;
 //    private List<Performance> myperformanceList;
+    private SessionManager session;
+    private SQLiteHandler db;
 
     public int like_count = 0;
     public int scrap_count = 0;
@@ -57,6 +61,9 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         public TextView pdate;
         public TextView ptime;
         public ImageView image;
+        public CheckBox like_Button;
+        public int pid = 0;
+        public String email;
 
         public MyViewHolder(View view) {
             super(view);
@@ -66,57 +73,42 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             pdate = (TextView) view.findViewById(R.id.card_date);
             ptime = (TextView) view.findViewById(R.id.card_time);
             image = (ImageView) view.findViewById(R.id.card_image);
+            like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
+
+            // SqLite database handler
+            db = new SQLiteHandler(view.getContext());
+            // session manager
+            session = new SessionManager(view.getContext());
+
+            HashMap<String, String> user = db.getUserDetails();
+            email = user.get("email");
 
            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = v.getContext();
-
-                    if(VIEWTYPE == 0) {
-                        Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                        intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
-                        context.startActivity(intent);
-                    }else if(VIEWTYPE == 1){
-                        Intent intent = new Intent(context, ListOfMyPerformanceDetailActivity.class);
-                        intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
-                        context.startActivity(intent);
-                    }
+                Context context = v.getContext();
+                if(VIEWTYPE == 0) {
+                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
+                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }else if(VIEWTYPE == 1){
+                    Intent intent = new Intent(context, ListOfMyPerformanceDetailActivity.class);
+                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, performanceList.get(getAdapterPosition()));
+                    context.startActivity(intent);
+                }
                 }
             });
 
-       /*     itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, myperformanceList.get(getAdapterPosition()));
-                    context.startActivity(intent);
-                }
-            });*/
-
-
-
-       /*     itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, myperformanceList.get(getAdapterPosition()));
-                    context.startActivity(intent);
-                }
-            });*/
-
-            final CheckBox like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
-            like_Button.setChecked(like_count == 1);
             like_Button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (like_count == 0) {
+                    if ( like_Button.isChecked() ) {
+                        addLike(email, pid);
                         Snackbar.make(v, "좋아요를 눌렀습니다.", Snackbar.LENGTH_SHORT).show();
-                        like_count++;
-                    } else if (like_count == 1) {
+                    }
+                    else {
+                        deleteLike(email, pid);
                         Snackbar.make(v, "좋아요를 취소했습니다.", Snackbar.LENGTH_SHORT).show();
-                        like_count--;
                     }
                 }
             });
@@ -138,18 +130,15 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         }
     }
 
-
-
-    public PerformanceAdapter(Context mContext, List<Performance> albumList, int viewtype) {
+    public PerformanceAdapter(Context mContext, List<Performance> performanceList, int viewtype) {
         this.mContext = mContext;
-        this.performanceList = albumList;
+        this.performanceList = performanceList;
         VIEWTYPE = viewtype;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.performance_card, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
@@ -162,18 +151,18 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         holder.pdate.setText(performance.getPdate());
         holder.ptime.setText(performance.getPtime());
         Glide.with(mContext).load(performance.getImage()).into(holder.image);
-        checkLikeState("pih0902@naver.com",50);
+        holder.like_Button.setChecked(performance.getLike_state()==1);
+        holder.pid = performance.getPID();
     }
-
     @Override
     public int getItemCount() {
         return performanceList.size();
     }
 
-    // Check like state
-    private void checkLikeState(final String email, final int performance_no) {
-        String tag_string_req = "req_likestate";
-        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_CHECK_LIKE, new Response.Listener<String>()
+    // add like
+    private void addLike(final String email, final int pid) {
+        String tag_string_req = "req_addLike";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_ADD_LIKE, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response) {
@@ -182,17 +171,14 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
-                        Log.d(TAG, "like!" + jObj.getInt("like_state"));
-//                        if(jObj.getInt("like_state")==0) like_count=0;
-//                        else like_count=1;
-//                        Log.d(TAG, "like count " + like_count);
+                        Log.d(TAG, "addLike: success");
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Log.d(TAG, "errorMsg: " + errorMsg);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d(TAG, "JSONException: " + e);
+                    Log.d(TAG, "errorMsg: " + e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
@@ -206,7 +192,48 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
-                params.put("performance_no", String.valueOf(performance_no));
+                params.put("performance_no", String.valueOf(pid));
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    // delete like
+    private void deleteLike(final String email, final int pid) {
+        String tag_string_req = "req_deleteLike";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_LIKE, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Register Response: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        Log.d(TAG, "deleteLike: success");
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Log.d(TAG, "errorMsg: " + errorMsg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "errorMsg: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Update Error: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("performance_no", String.valueOf(pid));
                 return params;
             }
         };

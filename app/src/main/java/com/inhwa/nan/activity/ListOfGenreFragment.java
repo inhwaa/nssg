@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
 import com.squareup.picasso.Picasso;
 
@@ -82,7 +83,7 @@ public class ListOfGenreFragment extends Fragment{
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.name.setText("#"+mGenres[position % mGenres.length]);
-            Picasso.with(context).load(mGenrePictures[position % mGenrePictures.length]).fit().into(ViewHolder.picture);
+            Glide.with(context).load(mGenrePictures[position % mGenrePictures.length]).into(ViewHolder.picture);
         }
 
         @Override

@@ -123,7 +123,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(" ");
+        collapsingToolbar.setTitle("내가 업로드한 공연");
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
@@ -138,10 +138,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle("내가 업로드했당꼐");
+                    collapsingToolbar.setTitle("내가 업로드한 공연");
                     isShow = true;
                 } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
+                    collapsingToolbar.setTitle("내가 업로드한 공연");
                     isShow = false;
                 }
             }
@@ -169,7 +169,7 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
-                                String PID = performance.getString("performance_no");
+                                int PID = performance.getInt("performance_no");
                                 String title = performance.getString("title");
                                 String content = performance.getString("content");
                                 String region = performance.getString("region");
