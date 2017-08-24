@@ -6,12 +6,12 @@
         android:id="@+id/nav_modify_group">
         <item
             android:id="@+id/nav_modify"
-            android:icon="@drawable/ic_edit"
+            android:icon="@drawable/ic_user"
             android:title="내 정보 변경" />
 
         <item
             android:id="@+id/nav_modifyArtist"
-            android:icon="@drawable/ic_edit"
+            android:icon="@drawable/ic_user"
             android:title="아티스트 정보 변경" />
 
     </group>
@@ -20,29 +20,28 @@
         <menu>
             <item
                 android:id="@+id/nav_scrap"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_star"
                 android:title="스크랩한 공연" />
 
             <item
                 android:id="@+id/nav_upload"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_performance"
                 android:title="업로드한 공연" />
         </menu>
     </item>
-
     <item android:title="Setting">
         <menu>
             <item
                 android:id="@+id/nav_pw"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_lock"
                 android:title="비밀번호 변경" />
             <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_unlock"
                 android:title="로그아웃" />
             <item
                 android:id="@+id/nav_quit"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_removeuser"
                 android:title="탈퇴" />
         </menu>
     </item>

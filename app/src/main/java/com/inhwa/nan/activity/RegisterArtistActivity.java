@@ -175,10 +175,8 @@ public class RegisterArtistActivity extends Activity {
                             JSONObject user = jObj.getJSONObject("user");
                             String name = user.getString("name");
                             String email = user.getString("email");
-                            String created_at = user
-                                    .getString("created_at");
+                            String created_at = user.getString("created_at");
                             String verify = user.getString("verify");
-
 
                             // Inserting row in users table
                             if(verify.matches("1")){
