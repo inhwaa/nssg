@@ -141,7 +141,6 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
     private void preparePerformances() {
         // email로 찾기
-
         String tag_string_req = "req_per_email";
         StringRequest strReq = new StringRequest(Request.Method.POST,
         AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {

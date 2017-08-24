@@ -69,6 +69,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
     public static String s_genre = "";
     public static String s_region = "";
     public static String s_email;
+    public static int PID;
     private static final String TAG = UploadPerformanceActivity.class.getSimpleName();
 
     private ImageView poster_view;
@@ -113,6 +114,8 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         String image = user.get("image");
 
         Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
+
+        PID = p.getPID();
 
         poster_view = (ImageView) findViewById(R.id.iv);
         img_change = (ImageButton) findViewById(R.id.imgbtn);
@@ -162,12 +165,10 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 String time = ptime.getText().toString();
                 String genre = s_genre;
                 String region = s_region;
-               // String location = "공연장주소";
                 String location = plocation.getText().toString();
                 String content = detail.getText().toString();
                 String email = s_email;
-
-                deletePerformance(title, date, time, genre, region, location, content, email);
+                deletePerformance(PID);
                 Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -324,8 +325,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void deletePerformance(final String title, final String date, final String time, final String genre, final String region,
-                                 final String location, final String content, final String email) {
+    private void deletePerformance(final int pid) {
 
         String tag_string_req = "req_deletePerformance";
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_PEFORMANCE, new Response.Listener<String>() {
@@ -363,15 +363,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("title", title);
-                params.put("date", date);
-                params.put("time", time);
-                params.put("genre", genre);
-                params.put("region", region);
-                params.put("location", location);
-                params.put("content", content);
-                params.put("email", email);
-                params.put("image", image);
+                params.put("performance_no", String.valueOf(pid));
                 return params;
             }
         };

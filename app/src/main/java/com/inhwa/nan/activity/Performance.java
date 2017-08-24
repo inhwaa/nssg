@@ -24,7 +24,6 @@ public class Performance implements Serializable {
     public Performance() {
     }
 
-
     public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image, String location) {
         this.PID = PID;
         this.title = title;
