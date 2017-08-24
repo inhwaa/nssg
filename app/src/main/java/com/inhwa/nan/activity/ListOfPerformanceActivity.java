@@ -163,7 +163,7 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
-                                String PID = performance.getString("performance_no");
+                                int PID = performance.getInt("performance_no");
                                 String title = performance.getString("title");
                                 String content = performance.getString("content");
                                 String region = performance.getString("region");
@@ -230,7 +230,7 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
-                                String PID = performance.getString("performance_no");
+                                int PID = performance.getInt("performance_no");
                                 String title = performance.getString("title");
                                 String content = performance.getString("content");
                                 String region = performance.getString("region");
