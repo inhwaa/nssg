@@ -95,8 +95,7 @@ public class LoginActivity extends Activity {
 
         });
 
-
-        // Link to Register Screen
+        // 회원가입 화면
         btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -129,7 +128,6 @@ public class LoginActivity extends Activity {
                                     }
 
                                 });
-
 
                 // 다이얼로그 생성
                 AlertDialog alertDialog = alertDialogBuilder.create();
@@ -206,7 +204,6 @@ public class LoginActivity extends Activity {
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(), "Json error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
-
             }
         }, new Response.ErrorListener() {
 
@@ -227,9 +224,7 @@ public class LoginActivity extends Activity {
                 params.put("password", password);
                 return params;
             }
-
         };
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }

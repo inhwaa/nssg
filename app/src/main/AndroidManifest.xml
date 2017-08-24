@@ -60,14 +60,11 @@
             android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
-<<<<<<< HEAD
-=======
             android:name="com.inhwa.nan.activity.ListOfMyPerformanceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>
 
         <activity
->>>>>>> sky
             android:name="com.inhwa.nan.activity.PerformanceDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>
@@ -92,6 +89,10 @@
 
         <activity
             android:name="com.inhwa.nan.activity.EditInformationActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name="com.inhwa.nan.activity.ArtistInfoActivity"
             android:windowSoftInputMode="adjustPan"></activity>
 
         <provider

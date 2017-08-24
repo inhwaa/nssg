@@ -44,7 +44,6 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
 
     private Context mContext;
     private List<Performance> performanceList;
-//    private List<Performance> myperformanceList;
 
     public int like_count = 0;
     public int scrap_count = 0;
@@ -84,28 +83,6 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
                 }
             });
 
-       /*     itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, myperformanceList.get(getAdapterPosition()));
-                    context.startActivity(intent);
-                }
-            });*/
-
-
-
-       /*     itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context, PerformanceDetailActivity.class);
-                    intent.putExtra(PerformanceDetailActivity.PERFORMANCE, myperformanceList.get(getAdapterPosition()));
-                    context.startActivity(intent);
-                }
-            });*/
-
             final CheckBox like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
             like_Button.setChecked(like_count == 1);
             like_Button.setOnClickListener(new View.OnClickListener() {
@@ -137,8 +114,6 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             });
         }
     }
-
-
 
     public PerformanceAdapter(Context mContext, List<Performance> albumList, int viewtype) {
         this.mContext = mContext;

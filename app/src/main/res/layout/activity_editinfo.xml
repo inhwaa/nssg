@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/white"
-                android:text="Name"
+                android:text="이름"
                 android:textSize="18sp"/>
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/white"
-                android:text="Email"
+                android:text="이메일"
                 android:textSize="18sp"/>
 
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:textColor="@color/white"
-                android:text="Nickname"
+                android:text="닉네임"
                 android:textSize="18sp"/>
 
             <EditText

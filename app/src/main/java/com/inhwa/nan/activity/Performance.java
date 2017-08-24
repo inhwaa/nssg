@@ -15,6 +15,7 @@ public class Performance implements Serializable {
     private String pdate;
     private String ptime;
     private String image;
+    private String location;
 
     private int count;
     private boolean userLiked;
@@ -22,7 +23,7 @@ public class Performance implements Serializable {
     public Performance() {
     }
 
-    public Performance(String PID, String title, String content, String region, String genre, String pdate, String ptime, String image) {
+    public Performance(String PID, String title, String content, String region, String genre, String pdate, String ptime, String image, String location) {
 
         this.PID = PID;
         this.title = title;
@@ -32,6 +33,7 @@ public class Performance implements Serializable {
         this.pdate = pdate;
         this.ptime = ptime;
         this.image = image;
+        this.location = location;
     }
 
     public String getPID() { return PID; }
@@ -85,5 +87,9 @@ public class Performance implements Serializable {
     public String getImage() { return image; }
 
     public void setImage(String image) { this.image = image; }
+
+    public String getLocation() {return location;}
+
+    public void setLocation(String location) { this.location = location;}
 
 }
