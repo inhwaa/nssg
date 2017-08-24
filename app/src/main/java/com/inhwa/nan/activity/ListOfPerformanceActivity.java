@@ -188,11 +188,11 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 String image = performance.getString("image");
                                 String location = performance.getString("location");
                                 int like_state = performance.getInt("like_state");
+                                int artist_no = performance.getInt("artist_no");
+                                int price = performance.getInt("price");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location);
-
-
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location,  artist_no, price);
                                 performanceList.add(p);
                             }
                             adapter.notifyDataSetChanged();
@@ -257,9 +257,11 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 String image = performance.getString("image");
                                 String location = performance.getString("location");
                                 int like_state = performance.getInt("like_state");
+                                int artist_no = performance.getInt("artist_no");
+                                int price = performance.getInt("price");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location);
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location, artist_no, price);
 
                                 performanceList.add(p);
                             }

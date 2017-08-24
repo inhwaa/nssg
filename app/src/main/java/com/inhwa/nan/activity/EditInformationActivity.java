@@ -68,9 +68,6 @@ public class EditInformationActivity extends Activity {
     ImageButton change;
     ImageView profile;
 
-    //Uri photoURI, albumURI = null;
-    Boolean album = false;
-
     private SQLiteHandler db;
     private SessionManager session;
 

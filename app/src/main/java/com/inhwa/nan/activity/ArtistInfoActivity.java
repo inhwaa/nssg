@@ -36,8 +36,11 @@ import static android.content.ContentValues.TAG;
 
 public class ArtistInfoActivity extends AppCompatActivity {
 
+    public static final String ARTIST_NO = "artist_no";
+
     private SQLiteHandler db;
     private SessionManager session;
+    private int artist_no;
 
     ImageView profile;
     TextView artist_name, artist_intro;
@@ -49,33 +52,18 @@ public class ArtistInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_info);
 
-        // SqLite database handler
-        db = new SQLiteHandler(getApplicationContext());
-
-        // Fetching user details from SQLite
-        HashMap<String, String> user = db.getUserDetails();
-
-        String name = user.get("name");
-        String email = user.get("email");
-        String image = user.get("image");
-        String artistname = user.get("sub_name");
+        artist_no = getIntent().getIntExtra(ARTIST_NO, 0);
 
         profile = (ImageView) findViewById(R.id.iv_profile);
         artist_name = (TextView) findViewById(R.id.tv_artistname);
         artist_intro = (TextView) findViewById(R.id.tv_artistintro);
 
-        // 이미지 session
-        Picasso.with(getApplicationContext()).invalidate("");
-        Picasso.with(this).load(image).memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE).into(profile);
-        byteArrayOutputStream = new ByteArrayOutputStream();
+        loadIntroduction(artist_no);
 
-        artist_name.setText(artistname);
-        loadIntroduction(email);
     }
 
     // load introduction from server
-    private void loadIntroduction(final String email) {
+    private void loadIntroduction(final int artist_no) {
         String tag_string_req = "req_introduction";
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DOWNLOAD_ARTIST, new Response.Listener<String>()
         {
@@ -86,7 +74,11 @@ public class ArtistInfoActivity extends AppCompatActivity {
                     JSONObject jObj = new JSONObject(response);
                     boolean error = jObj.getBoolean("error");
                     if (!error) {
+                        artist_name.setText(jObj.getString("artist_name"));
                         artist_intro.setText(jObj.getString("introduction"));
+                        Picasso.with(getApplicationContext()).invalidate("");
+                        Picasso.with(getApplicationContext()).load(jObj.getString("artist_image")).memoryPolicy(MemoryPolicy.NO_CACHE)
+                                .networkPolicy(NetworkPolicy.NO_CACHE).into(profile);
                     } else {
                         String errorMsg = jObj.getString("error_msg");
                         Toast.makeText(getApplicationContext(), errorMsg, Toast.LENGTH_LONG).show();
@@ -108,7 +100,7 @@ public class ArtistInfoActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
+                params.put("artist_no", String.valueOf(artist_no));
                 return params;
             }
         };

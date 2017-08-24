@@ -62,6 +62,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         public TextView genre;
         public TextView pdate;
         public TextView ptime;
+        public TextView price;
         public ImageView image;
         public CheckBox like_Button;
         public int pid = 0;
@@ -75,6 +76,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
             pdate = (TextView) view.findViewById(R.id.card_date);
             ptime = (TextView) view.findViewById(R.id.card_time);
             image = (ImageView) view.findViewById(R.id.card_image);
+            price = (TextView) view.findViewById(R.id.card_price);
             like_Button = (CheckBox) itemView.findViewById(R.id.chk_like);
 
             // SqLite database handler
@@ -154,6 +156,7 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         holder.genre.setText(performance.getGenre());
         holder.pdate.setText(performance.getPdate());
         holder.ptime.setText(performance.getPtime());
+        holder.price.setText(performance.getPrice()==0?"무료":String.valueOf(performance.getPrice())+"원");
         Glide.with(mContext).load(performance.getImage()).into(holder.image);
         holder.like_Button.setChecked(performance.getLike_state()==1);
         holder.pid = performance.getPID();

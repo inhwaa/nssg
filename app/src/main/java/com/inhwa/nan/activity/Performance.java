@@ -17,7 +17,8 @@ public class Performance implements Serializable {
     private String image;
     private int like_state;
     private String location;
-
+    private int artist_no;
+    private int price;
     private int count;
     private boolean userLiked;
 
@@ -36,8 +37,7 @@ public class Performance implements Serializable {
         this.location = location;
     }
 
-    public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image, int like_state, String location) {
-
+    public Performance(int PID, String title, String content, String region, String genre, String pdate, String ptime, String image, int like_state, String location, int artist_no, int price) {
         this.PID = PID;
         this.title = title;
         this.content = content;
@@ -47,7 +47,17 @@ public class Performance implements Serializable {
         this.ptime = ptime;
         this.image = image;
         this.like_state = like_state;
+        this.artist_no = artist_no;
+        this.price = price;
     }
+
+    public int getArtist_no() {return artist_no;}
+
+    public void setArtist_no(int artist_no) {this.artist_no = artist_no;}
+
+    public int getPrice() {return price;}
+
+    public void setPrice(int price) {this.price = price;}
 
     public int getPID() { return PID; }
 

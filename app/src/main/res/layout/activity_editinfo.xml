@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/btn_login_bg"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:layout_marginRight="2dp"
             android:text="취소" />
 
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/btn_login_bg"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorAccent"
             android:text="수정" />
 
     </LinearLayout>

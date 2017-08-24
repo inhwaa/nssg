@@ -316,7 +316,6 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 params.put("region", region);
                 params.put("location", location);
                 params.put("content", content);
-                params.put("email", email);
                 params.put("image", image);
                 return params;
             }

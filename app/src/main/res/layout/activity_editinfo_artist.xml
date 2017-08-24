@@ -179,7 +179,7 @@
                 android:layout_weight="1"
                 android:background="@color/btn_login_bg"
                 android:text="취소"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="?attr/colorAccent" />
 
             <Button
                 android:id="@+id/btnModify"
@@ -188,7 +188,7 @@
                 android:layout_weight="1"
                 android:background="@color/btn_login_bg"
                 android:text="수정"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="?attr/colorAccent" />
 
         </LinearLayout>
     </LinearLayout>
