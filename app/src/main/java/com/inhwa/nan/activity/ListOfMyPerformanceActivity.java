@@ -150,9 +150,16 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                             String ptime = performance.getString("perform_time");
                             String image = performance.getString("image");
                             String location = performance.getString("location");
+                            int like_state = performance.getInt("like_state");
+                            int scrap_state = performance.getInt("scrap_state");
+                            int artist_no = performance.getInt("artist_no");
+                            int price = performance.getInt("price");
+                            int like_freq = performance.getInt("like_freq");
+                            int scrap_freq = performance.getInt("scrap_freq");
 
                             // Performance class 생성, 리스트에 추가한다.
-                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, location); //수정삭제 가능한 페이지로 변경
+                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, scrap_state,
+                                    location, artist_no, price, like_freq, scrap_freq);
                             performanceList.add(p);
                         }
                         adapter.notifyDataSetChanged();

@@ -67,11 +67,11 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        initCollapsingToolbar();
+
         position = getIntent().getIntExtra(EXTRA_POSITION, 0);
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
-
-        initCollapsingToolbar();
 
         performanceList = new ArrayList<>();
         adapter = new PerformanceAdapter(this, performanceList,0);
@@ -107,17 +107,14 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Initializing collapsing toolbar
-     * Will show and hide the toolbar title on scroll
-     */
+
     private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle("스크랩한 공연");
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
-        appBarLayout.setExpanded(false,false);
-    }
+        appBarLayout.setExpanded(false);
+
 
     private void preparePerformances(final String email) {
         String tag_string_req = "req_performance";

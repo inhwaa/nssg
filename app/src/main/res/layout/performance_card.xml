@@ -183,6 +183,7 @@
             android:textSize="@dimen/article_subheading" />
 
         <TextView
+            android:layout_marginTop="3dp"
             android:id="@+id/card_scrap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -204,6 +205,7 @@
             android:button="@drawable/chk_scrap"/>
 
         <TextView
+            android:layout_marginTop="3dp"
             android:id="@+id/card_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

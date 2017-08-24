@@ -1,45 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_backdrop_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar2"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_marginTop="60dp"
+        android:background="@color/white">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/tv_artistname"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorAccent"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp" />
 
-        <TextView
-            android:textSize="20sp"
-            android:padding="8dp"
-            android:id="@+id/tv_artistintro"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/border"
-            android:layout_marginBottom="20dp"/>
+            <TextView
+                android:id="@+id/tv_artistname"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:textColor="#002266"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
-</ScrollView>
+            <TextView
+                android:id="@+id/tv_artistintro"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/border"
+                android:padding="8dp"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

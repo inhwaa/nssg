@@ -1,8 +1,12 @@
 package com.inhwa.nan.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,12 +49,16 @@ public class ArtistInfoActivity extends AppCompatActivity {
     ImageView profile;
     TextView artist_name, artist_intro;
 
-    ByteArrayOutputStream byteArrayOutputStream;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_info);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initCollapsingToolbar();
 
         artist_no = getIntent().getIntExtra(ARTIST_NO, 0);
 
@@ -59,7 +67,23 @@ public class ArtistInfoActivity extends AppCompatActivity {
         artist_intro = (TextView) findViewById(R.id.tv_artistintro);
 
         loadIntroduction(artist_no);
+    }
 
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar2);
+        collapsingToolbar.setTitle("아티스트 정보");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar2);
+        appBarLayout.setExpanded(false);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // load introduction from server
@@ -93,7 +117,6 @@ public class ArtistInfoActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Update Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                //     hideDialog();
             }
         }) {
             @Override

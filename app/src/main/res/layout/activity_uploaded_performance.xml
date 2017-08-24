@@ -223,6 +223,7 @@
                     android:textSize="18sp" />
 
                 <EditText
+                    android:padding="5dp"
                     android:layout_marginLeft="5dp"
                     android:id="@+id/et_price"
                     android:layout_width="match_parent"
@@ -231,11 +232,8 @@
                     android:background="@drawable/border"
                     android:hint="가격"
                     android:textAlignment="viewEnd" />
-
             </LinearLayout>
-
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/linearLayout2"

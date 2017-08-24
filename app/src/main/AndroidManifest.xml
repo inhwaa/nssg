@@ -37,8 +37,8 @@
 
         <activity
             android:name="com.inhwa.nan.activity.Splash_Activity"
-            android:theme="@style/splash"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -47,8 +47,7 @@
 
         <activity
             android:name="com.inhwa.nan.activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name="com.inhwa.nan.activity.MainActivity"
@@ -104,6 +103,7 @@
 
         <activity
             android:name="com.inhwa.nan.activity.ArtistInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"></activity>
 
         <provider
@@ -116,8 +116,7 @@
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
 
-        <activity android:name="com.inhwa.nan.activity.MapsActivityCurrentPlace">
-        </activity>
+        <activity android:name="com.inhwa.nan.activity.MapsActivityCurrentPlace"></activity>
 
         <activity
             android:name="com.inhwa.nan.activity.EditInformationArtistActivity"

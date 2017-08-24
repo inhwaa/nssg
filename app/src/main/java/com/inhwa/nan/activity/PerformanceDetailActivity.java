@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,6 +56,12 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        initCollapsingToolbar();
+
         // SqLite database handler
         db = new SQLiteHandler(getApplicationContext());
 
@@ -91,6 +98,14 @@ public class PerformanceDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("공연 상세 정보");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout.setExpanded(false);
     }
 
     @Override
