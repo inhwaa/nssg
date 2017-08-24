@@ -122,11 +122,15 @@ public class MainActivity extends AppCompatActivity
         // verify값 0은 일반 사용자, 1은 아티스트
         if (verify.equals("1")) {
             hideItem("modify");
-        } else if (verify.equals("0")){
+        } else if (verify.equals("0")) {
             hideItem("upload");
             hideItem("artist_modify");
         }
         navigationView.setNavigationItemSelectedListener(this);
+        int size = navigationView.getMenu().size();
+        for (int i = 0; i < size; i++) {
+            navigationView.getMenu().getItem(i).setChecked(false);
+        }
     }
 
     /**
@@ -193,9 +197,10 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this, EditInformationArtistActivity.class);
             startActivity(intent);
         }/**else if (id == R.id.nav_scrap) {
-            // 스크랩한 공연
+         // 스크랩한 공연
 
-        }**/ else if (id == R.id.nav_upload) {
+         }**/
+        else if (id == R.id.nav_upload) {
             // 업로드한 공연
             Intent intent = new Intent(MainActivity.this, ListOfMyPerformanceActivity.class);
             startActivity(intent);
@@ -208,6 +213,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_quit) {
             // 탈퇴
         }
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -216,11 +222,11 @@ public class MainActivity extends AppCompatActivity
     public void hideItem(String menu_id) {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu nav_Menu = navigationView.getMenu();
-        if(menu_id == "modify") {
+        if (menu_id == "modify") {
             nav_Menu.findItem(R.id.nav_modify).setVisible(false);
-        } else if(menu_id == "artist_modify"){
+        } else if (menu_id == "artist_modify") {
             nav_Menu.findItem(R.id.nav_modifyArtist).setVisible(false);
-        }else if(menu_id == "upload"){
+        } else if (menu_id == "upload") {
             nav_Menu.findItem(R.id.nav_upload).setVisible(false);
         }
     }
@@ -254,6 +260,7 @@ public class MainActivity extends AppCompatActivity
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
+
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);

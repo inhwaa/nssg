@@ -7,6 +7,7 @@ package com.inhwa.nan.activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.inhwa.nan.R;
 import com.inhwa.nan.helper.SQLiteHandler;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
@@ -27,8 +29,11 @@ import java.util.HashMap;
 public class PerformanceDetailActivity extends AppCompatActivity {
 
     public static final String PERFORMANCE = "performance";
-    public TextView artist, region, genre, pdate, ptime, detail, title;
+
     private SQLiteHandler db;
+
+    public TextView artist, region, genre, pdate, ptime, detail, title;
+    public ImageView poster;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,12 +56,16 @@ public class PerformanceDetailActivity extends AppCompatActivity {
         ptime = (TextView) findViewById(R.id.performance_time);
         region = (TextView) findViewById(R.id.performance_location);
         detail = (TextView) findViewById(R.id.performance_detail);
+        poster = (ImageView) findViewById(R.id.iv_poster);
 
         title.setText(p.getTitle());
         pdate.setText(p.getPdate());
         ptime.setText(p.getPtime());
         region.setText(p.getRegion());
         detail.setText(p.getContent());
+
+        //등록했던 공연 포스터 불러오기
+        Picasso.with(this).load(p.getImage()).into(poster);
         //string performance_no = p.getPID().toString(); performance_no 알고싶을때 하면 됨...아마도
 
         artist.setOnClickListener(new View.OnClickListener() {

@@ -74,11 +74,11 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
 
     private ImageView poster_view;
     private ImageButton img_change;
-    private EditText ptitle, detail;
+    private EditText ptitle, detail, price;
     private TextView pdate, ptime, plocation;
     private Spinner genre, region;
 
-    private Button btnCancel, btnModify, btnDelete;
+    private Button btnTime, btnDate, btnCancel, btnModify, btnDelete, btnMap;
 
     private String place_info = "";
 
@@ -130,10 +130,14 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         genre = (Spinner) findViewById(R.id.spinnerSetGenre);
         region = (Spinner) findViewById(R.id.spinnerSetRegion);
         plocation = (TextView) findViewById(R.id.place_details);
+        price = (EditText) findViewById(R.id.et_price);
 
+        btnTime = (Button) findViewById(R.id.btnSetTime);
+        btnDate = (Button) findViewById(R.id.btnSetDate);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnModify = (Button) findViewById(R.id.btnModify);
+        btnMap = (Button) findViewById(R.id.btnMap);
 
         //업로드 한 공연 정보 불러오기
         ptitle.setText(p.getTitle());
@@ -146,6 +150,26 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         img_change.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 albumAction();
+            }
+        });
+
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "공연날짜를 선택하세요.", Toast.LENGTH_SHORT).show();
+                showDialog(DIALOG_DATE);
+            }
+        });
+        btnTime.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "공연시간을 선택하세요.", Toast.LENGTH_SHORT).show();
+                showDialog(DIALOG_TIME);
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent2 = new Intent(ListOfMyPerformanceDetailActivity.this, MapsActivityCurrentPlace.class);
+                startActivityForResult(intent2, 0);
             }
         });
 
@@ -266,6 +290,13 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(),image, Toast.LENGTH_LONG).show();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+        if (resultCode == 0) {
+            if (data != null) {
+                place_info = data.getStringExtra("place_info");
+                // Format the place's details and display them in the TextView.
+                plocation.setText(data.getStringExtra("place_info"));
             }
         }
     }

@@ -6,7 +6,8 @@
     android:id="@+id/detail_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,8 +19,9 @@
         android:orientation="vertical">
 
         <TextView
+            android:background="@drawable/border"
             android:id="@+id/performance_title"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -66,7 +68,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:background="@color/white"
+                    android:background="@drawable/border"
                     android:id="@+id/performance_artist"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -103,7 +105,7 @@
 
                     <TextView
                         android:layout_marginRight="5dp"
-                        android:background="@color/white"
+                        android:background="@drawable/border"
                         android:gravity="center"
                         android:id="@+id/performance_date"
                         android:layout_width="match_parent"
@@ -131,7 +133,7 @@
 
                     <TextView
                         android:layout_marginLeft="5dp"
-                        android:background="@color/white"
+                        android:background="@drawable/border"
                         android:gravity="center"
                         android:id="@+id/performance_time"
                         android:layout_width="match_parent"
@@ -167,7 +169,7 @@
 
                     <TextView
                         android:layout_marginRight="5dp"
-                        android:background="@color/white"
+                        android:background="@drawable/border"
                         android:gravity="center"
                         android:id="@+id/performance_location"
                         android:layout_width="match_parent"
@@ -195,7 +197,7 @@
 
                     <TextView
                         android:layout_marginLeft="5dp"
-                        android:background="@color/white"
+                        android:background="@drawable/border"
                         android:gravity="center"
                         android:id="@+id/performance_price"
                         android:layout_width="match_parent"
@@ -218,7 +220,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:background="@color/white"
+                android:background="@drawable/border"
                 android:gravity="center"
                 android:id="@+id/performance_detail"
                 android:layout_width="match_parent"

@@ -182,7 +182,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         });
         btnSetTime.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "공연시간을 선택하세요.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "공연시간을 선택하세요.", Toast.LENGTH_SHORT).show();
                 showDialog(DIALOG_TIME);
             }
         });
@@ -202,7 +202,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "모든 항목을 입력하세요", Toast.LENGTH_LONG).show();
                 } else {
                     uploadPerformance(title, date, time, genre, region, location, content, email);
-                    Toast.makeText(getApplicationContext(), "업로드.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "업로드.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -217,7 +217,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
 
         btnMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //openAutocompleteActivity();
                 Intent intent2 = new Intent(UploadPerformanceActivity.this, MapsActivityCurrentPlace.class);
                 startActivityForResult(intent2, 0);
             }
@@ -323,7 +322,7 @@ public class UploadPerformanceActivity extends AppCompatActivity{
                     boolean error = jObj.getBoolean("error");
                     // Check for error node in json
                    if (!error) {
-                       Toast.makeText(getApplicationContext(),jObj.getString("path"), Toast.LENGTH_LONG).show();
+                       //Toast.makeText(getApplicationContext(),jObj.getString("path"), Toast.LENGTH_LONG).show();
                     } else {
                         // Error in login. Get the error message
                         String errorMsg = jObj.getString("error_msg");
