@@ -282,7 +282,6 @@
                 android:backgroundTint="@color/white"
                 android:text="삭제" />
 
-
             <Button
                 android:id="@+id/btnModify"
                 android:layout_width="wrap_content"
