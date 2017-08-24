@@ -146,7 +146,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
         spinnerSetGenre = (Spinner) findViewById(R.id.spinnerSetGenre);
         spinnerSetRegion = (Spinner) findViewById(R.id.spinnerSetRegion);
 
-        //edtSetLocation = (EditText) findViewById(R.id.edtSetLocation);
         edtIntroPerformance = (EditText) findViewById(R.id.edtIntroPerformance);
 
         btnUpload = (Button) findViewById(R.id.btnUpload);
@@ -213,7 +212,6 @@ public class UploadPerformanceActivity extends AppCompatActivity{
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "취소", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

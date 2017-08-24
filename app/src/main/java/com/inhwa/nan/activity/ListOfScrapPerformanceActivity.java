@@ -68,10 +68,11 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        initCollapsingToolbar();
+
         position = getIntent().getIntExtra(EXTRA_POSITION, 0);
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
-
 
         performanceList = new ArrayList<>();
         adapter = new PerformanceAdapter(this, performanceList, 1);
@@ -108,6 +109,13 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("스크랩한 공연");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout.setExpanded(false);
+    }
 
     private void preparePerformances() {
         // email로 찾기
