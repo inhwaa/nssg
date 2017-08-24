@@ -250,4 +250,86 @@ public class PerformanceAdapter extends RecyclerView.Adapter<PerformanceAdapter.
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
+
+    // add Scrap
+    private void addScrap(final String email, final int pid) {
+        String tag_string_req = "req_addLike";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_ADD_SCRAP, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Register Response: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        Log.d(TAG, "addScrap: success");
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Log.d(TAG, "errorMsg: " + errorMsg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "errorMsg: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Update Error: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("performance_no", String.valueOf(pid));
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
+
+    // delete Scrap
+    private void deleteScrap(final String email, final int pid) {
+        String tag_string_req = "req_deleteLike";
+        StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_SCRAP, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "Register Response: " + response.toString());
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        Log.d(TAG, "deleteScrap: success");
+                    } else {
+                        String errorMsg = jObj.getString("error_msg");
+                        Log.d(TAG, "errorMsg: " + errorMsg);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Log.d(TAG, "errorMsg: " + e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "Update Error: " + error.getMessage());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("performance_no", String.valueOf(pid));
+                return params;
+            }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+    }
 }

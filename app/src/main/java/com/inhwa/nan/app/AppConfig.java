@@ -37,6 +37,12 @@ public class AppConfig {
 	// Cancel Like
 	public static String URL_DELETE_LIKE = "http://220.230.122.180/delete_like.php";
 
+	// Add Scrap
+	public static String URL_ADD_SCRAP = "http://220.230.122.180/add_scrap.php";
+
+	// Cancel Scrap
+	public static String URL_DELETE_SCRAP = "http://220.230.122.180/delete_scrap.php";
+
 	public static String URL_REGISTER_ARTIST2 = "http://220.230.122.180/register_artist2.php";
 
 	public static String URL_MY_PERFORMANCE = "http://220.230.122.180/myperformance.php";
