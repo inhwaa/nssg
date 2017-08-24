@@ -71,7 +71,7 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         position = getIntent().getIntExtra(EXTRA_POSITION, 0);
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
-        
+
 
         performanceList = new ArrayList<>();
         adapter = new PerformanceAdapter(this, performanceList, 1);
