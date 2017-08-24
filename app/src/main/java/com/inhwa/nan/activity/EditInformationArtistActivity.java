@@ -233,7 +233,7 @@ public class EditInformationArtistActivity extends Activity {
                             HashMap<String, String> user = db.getUserDetails();
                             db.updateUser(email, artistname, user.get("image"));
                         }
-                        Toast.makeText(getApplicationContext(), "성공적으로 수정되었습니다.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "성공적으로 수정되었습니다.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         String errorMsg = jObj.getString("error_msg");
