@@ -69,12 +69,13 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
     public static String s_genre = "";
     public static String s_region = "";
     public static String s_email;
+    public static int PID;
     private static final String TAG = UploadPerformanceActivity.class.getSimpleName();
 
     private ImageView poster_view;
     private ImageButton img_change;
     private EditText ptitle, detail;
-    private TextView pdate, ptime;
+    private TextView pdate, ptime, plocation;
     private Spinner genre, region;
 
     private Button btnCancel, btnModify, btnDelete;
@@ -114,8 +115,13 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
 
         Performance p = (Performance) getIntent().getSerializableExtra(PERFORMANCE);
 
+        PID = p.getPID();
+
         poster_view = (ImageView) findViewById(R.id.iv);
         img_change = (ImageButton) findViewById(R.id.imgbtn);
+
+        //등록했던 공연 포스터 불러오기
+        Picasso.with(this).load(p.getImage()).into(poster_view);
 
         ptitle = (EditText) findViewById(R.id.edtSetTitle);
         pdate = (TextView) findViewById(R.id.date_tv);
@@ -123,24 +129,20 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         detail = (EditText) findViewById(R.id.edtIntroPerformance);
         genre = (Spinner) findViewById(R.id.spinnerSetGenre);
         region = (Spinner) findViewById(R.id.spinnerSetRegion);
+        plocation = (TextView) findViewById(R.id.place_details);
 
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnDelete = (Button) findViewById(R.id.btnDelete);
         btnModify = (Button) findViewById(R.id.btnModify);
 
+        //업로드 한 공연 정보 불러오기
         ptitle.setText(p.getTitle());
         pdate.setText(p.getPdate());
         ptime.setText(p.getPtime());
-        //region.setText(p.getRegion());
+        //if (p.getRegion() == )
         detail.setText(p.getContent());
         //genre.getSelectedItem(p.getContent());
-
-        // 이미지 session
-        Picasso.with(getApplicationContext()).invalidate("");
-        Picasso.with(this).load(image).memoryPolicy(MemoryPolicy.NO_CACHE)
-                .networkPolicy(NetworkPolicy.NO_CACHE).into(poster_view);
-        byteArrayOutputStream = new ByteArrayOutputStream();
-
+        plocation.setText(p.getLocation());
         img_change.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 albumAction();
@@ -163,12 +165,10 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 String time = ptime.getText().toString();
                 String genre = s_genre;
                 String region = s_region;
-                String location = "공연장주소";
-                // String location = mPlaceDetailsText.getText().toString();
+                String location = plocation.getText().toString();
                 String content = detail.getText().toString();
                 String email = s_email;
-
-                deletePerformance(title, date, time, genre, region, location, content, email);
+                deletePerformance(PID);
                 Toast.makeText(getApplicationContext(), "삭제되었습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -182,8 +182,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
                 String time = ptime.getText().toString();
                 String genre = s_genre;
                 String region = s_region;
-                String location = "공연장주소";
-                // String location = mPlaceDetailsText.getText().toString();
+                String location = plocation.getText().toString();
                 String content = detail.getText().toString();
                 String email = s_email;
                 if (title.matches("")||date.matches("날짜 선택")||time.matches("시간 선택")||content.matches("")) {
@@ -326,8 +325,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
-    private void deletePerformance(final String title, final String date, final String time, final String genre, final String region,
-                                 final String location, final String content, final String email) {
+    private void deletePerformance(final int pid) {
 
         String tag_string_req = "req_deletePerformance";
         StringRequest strReq = new StringRequest(Request.Method.POST, AppConfig.URL_DELETE_PEFORMANCE, new Response.Listener<String>() {
@@ -365,15 +363,7 @@ public class ListOfMyPerformanceDetailActivity extends AppCompatActivity{
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("title", title);
-                params.put("date", date);
-                params.put("time", time);
-                params.put("genre", genre);
-                params.put("region", region);
-                params.put("location", location);
-                params.put("content", content);
-                params.put("email", email);
-                params.put("image", image);
+                params.put("performance_no", String.valueOf(pid));
                 return params;
             }
         };

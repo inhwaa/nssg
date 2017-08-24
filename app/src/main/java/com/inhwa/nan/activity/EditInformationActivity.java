@@ -121,7 +121,7 @@ public class EditInformationActivity extends Activity {
 
         change.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDialog(CHOICE);
+                albumAction();
             }
         });
 
@@ -142,29 +142,6 @@ public class EditInformationActivity extends Activity {
         });
     }
 
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case CHOICE:
-                final CharSequence[] items = {"사진 가져오기"};
-                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-
-                dialog.setItems(items,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                if (items[id] == "사진 가져오기") {
-                                    albumAction();
-                                }
-                                dialog.dismiss();
-                            }
-                        });
-                AlertDialog photo_dialog = dialog.create();
-
-                photo_dialog.show();
-                break;
-        }
-        return super.onCreateDialog(id);
-    }
-
     private void albumAction() {
         Intent albumIntent = new Intent(Intent.ACTION_GET_CONTENT);
         albumIntent.setType("image/*");
@@ -176,6 +153,14 @@ public class EditInformationActivity extends Activity {
         albumIntent.putExtra("return-data", true);
 
         startActivityForResult(Intent.createChooser(albumIntent, "Select Image From Gallery"), PICK_IMAGE_REQUEST);
+    }
+
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
     }
 
     @Override
@@ -196,14 +181,6 @@ public class EditInformationActivity extends Activity {
                 e.printStackTrace();
             }
         }
-    }
-
-    public String getStringImage(Bitmap bmp) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
     }
 
     // load Profile to Server

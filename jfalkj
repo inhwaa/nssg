@@ -1,0 +1,283 @@
+[33mcommit 3b9296b7fefdf30d1d274c7017e1333199bb656f[m[33m ([m[1;36mHEAD -> [m[1;32msona[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 8c74bc4 09e6306
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 23 21:27:11 2017 +0900
+
+    merge sona
+
+[33mcommit 8c74bc4fb72434291e12dff3892c98acd3665796[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 23 21:20:35 2017 +0900
+
+    에러 해결
+
+[33mcommit 69b56e5b0a6846110303ec349ee7f7b03e22a846[m
+Merge: fd7fc71 7313a3f
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 23 21:18:24 2017 +0900
+
+    merge sky
+
+[33mcommit fd7fc71e69ac15a3041f6a556ec5cd7f62f2a499[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 23 21:12:32 2017 +0900
+
+    좋아요
+
+[33mcommit 09e6306777cf90a038d99992863738434b0f28a5[m[33m ([m[1;31morigin/sona[m[33m)[m
+Author: Sona <jang_sona@naver.com>
+Date:   Wed Aug 23 21:09:58 2017 +0900
+
+    나야나
+
+[33mcommit 7313a3fa32531fa38563ef35eecc050782d5caa3[m
+Author: babynuri <yolonulle@naver.com>
+Date:   Wed Aug 23 21:08:18 2017 +0900
+
+    listdetail
+
+[33mcommit af7926ad23a6fefbcbe533992cdb89cf9df2e11c[m
+Author: babynuri <yolonulle@naver.com>
+Date:   Wed Aug 23 16:43:53 2017 +0900
+
+    addcomment
+
+[33mcommit f4c3e7b473ff954d8008a617d180eaf775855f14[m
+Merge: fa4585c 9816198
+Author: inhwa <pih0902@gmail.com>
+Date:   Tue Aug 22 22:01:10 2017 +0900
+
+    merge
+
+[33mcommit 9816198f27521f290d751a39b9d8361be5981132[m
+Author: babynuri <yolonulle@naver.com>
+Date:   Tue Aug 22 21:57:36 2017 +0900
+
+    performane~~~~~
+
+[33mcommit fa4585c34f9412217d0e6200f0151f1b7daec453[m
+Merge: 85d9c99 9b295ec
+Author: inhwa <pih0902@gmail.com>
+Date:   Tue Aug 22 21:51:52 2017 +0900
+
+    Merge branch 'sona' of https://github.com/inhwaa/nssg into sona
+
+[33mcommit 85d9c9929d20e9525ee95c236db21f642a2e968c[m
+Merge: ace69c3 7fe2c7b
+Author: inhwa <pih0902@gmail.com>
+Date:   Tue Aug 22 21:51:35 2017 +0900
+
+    change module
+
+[33mcommit 9b295ec91caa88371856c53d37acbfefca80eee7[m
+Author: Sona <jang_sona@naver.com>
+Date:   Tue Aug 22 21:48:45 2017 +0900
+
+    업로드한 공연
+
+[33mcommit ace69c3c2a551882a18e698b981e56e31277dad2[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Tue Aug 22 21:37:42 2017 +0900
+
+    아티스트 정보 수정
+
+[33mcommit 7fe2c7b974c8ea8272b0c2d903bf1f5dd11a1fb3[m
+Merge: 4df0265 a73b96e
+Author: Sona <jang_sona@naver.com>
+Date:   Mon Aug 21 22:36:20 2017 +0900
+
+    야호
+
+[33mcommit 4df0265d1de0e2dd16000e7274e465e7a502e9bb[m
+Author: Sona <jang_sona@naver.com>
+Date:   Mon Aug 21 22:19:48 2017 +0900
+
+    abc
+
+[33mcommit 20222367ded4a0b46afd27638bf0cca87dc147b6[m
+Author: Sona <jang_sona@naver.com>
+Date:   Mon Aug 21 22:09:14 2017 +0900
+
+    sibal
+
+[33mcommit a73b96eb24eff1897530e692465bbccb3bbf056d[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Mon Aug 21 22:03:18 2017 +0900
+
+    공연정보 보여주기 수정
+
+[33mcommit 28bc0f4b42b717525a528b87559428b744917689[m
+Merge: b9ec028 172e07f
+Author: inhwa <pih0902@gmail.com>
+Date:   Mon Aug 21 21:28:53 2017 +0900
+
+    mergegit add .
+
+[33mcommit b9ec02896743d1f8b2ea4cc5ef2db67412119c7a[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Mon Aug 21 21:24:26 2017 +0900
+
+    module
+
+[33mcommit 172e07f201c989a057918cb9bf065704be42512b[m[33m ([m[1;31morigin/sky[m[33m)[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Mon Aug 21 20:47:53 2017 +0900
+
+    modifed
+
+[33mcommit dd93e9bc42ea564ef1d201f86865450cf908b7b2[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Mon Aug 21 20:41:24 2017 +0900
+
+    공연정보 불러오기
+
+[33mcommit de965dd56d63cc66643cef3d764439f8837e61d5[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sat Aug 19 18:57:33 2017 +0900
+
+    [uploadperformance] 공연 이미지 업로드 기능 추가
+
+[33mcommit d1fa038c5564135b8f1b43a5b4ff15b2e3e5fedc[m
+Merge: 3d2dc24 2be5ed4
+Author: inhwa <pih0902@gmail.com>
+Date:   Sat Aug 19 16:43:39 2017 +0900
+
+    Merge branch 'sky'
+
+[33mcommit 3d2dc24c2dfe430d55d0c033f520a13ad32f82a1[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sat Aug 19 16:43:35 2017 +0900
+
+    module change
+
+[33mcommit ccdb187435a5e5f39f88125e69e3923bc4ee9527[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sat Aug 19 16:43:04 2017 +0900
+
+    module change
+
+[33mcommit 2be5ed410e7a4362897baba0408f04b34d40532c[m
+Merge: e9ff43d e040ede
+Author: inhwa <pih0902@gmail.com>
+Date:   Sat Aug 19 16:41:34 2017 +0900
+
+    mergegit status
+
+[33mcommit e9ff43d590566641d6e634b576db2dd54378e846[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sat Aug 19 16:40:04 2017 +0900
+
+    edit drawer
+
+[33mcommit e040ede57c28cd447e50441655b6d5a5e5ee73bf[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sat Aug 19 16:37:02 2017 +0900
+
+    update_artist_edit
+
+[33mcommit d7b8ca9ebafed2d6afdaa594c60d01de0a572a56[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Wed Aug 16 21:06:51 2017 +0900
+
+    uploadperfoamance
+
+[33mcommit 76d101b542d740e9599f37353e9c6dd73dce7327[m
+Merge: f3e520f c3261a7
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 16 19:41:10 2017 +0900
+
+    Merge branch 'sky'
+
+[33mcommit c3261a784304ca79c9243159bd22c1ccdf5f437d[m
+Merge: faf9638 99f47db
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 16 19:40:39 2017 +0900
+
+    merge
+
+[33mcommit f3e520f1e64b3b00f0ac240e6a8249681bc7eeb4[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Wed Aug 16 19:37:50 2017 +0900
+
+    hide fab
+
+[33mcommit 99f47dbcc05f949a296762ecc6684b11f861b8c1[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Wed Aug 16 19:34:08 2017 +0900
+
+    downloadthis
+
+[33mcommit 259144a9029c1833b1c5cad21513b868b5359828[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:46:02 2017 +0900
+
+    module
+
+[33mcommit e5347247629b79aff32152491a615bbf5dd9a234[m
+Merge: 313e4d6 13aee51
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:42:30 2017 +0900
+
+    Merge branch 'sona' of https://github.com/inhwaa/nssg
+
+[33mcommit 313e4d6f54f3eb5eed0137b57bd0701fc16523a2[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:42:20 2017 +0900
+
+    modify module
+
+[33mcommit a41e986eaf2ed3f583370f92d0dc0ff7cbd23e76[m
+Merge: faf9638 e53f8bd
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 16:36:22 2017 +0900
+
+    Merge branch 'sky' of https://github.com/inhwaa/nssg
+
+[33mcommit e53f8bda3f822fdaa6388ef24fdf8a4bf9248c79[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sun Aug 13 16:28:17 2017 +0900
+
+    shit
+
+[33mcommit 13aee517e44027301472b7a4c915b25cf5d05751[m
+Author: Sona <jang_sona@naver.com>
+Date:   Sun Aug 13 16:02:11 2017 +0900
+
+    아티스트 등록 및 인증 완료
+
+[33mcommit 0688992d9daaa825766ee4d1dec04c0a8bec8e94[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sun Aug 13 15:02:45 2017 +0900
+
+    mapplz..
+
+[33mcommit faf9638da3875f85cbbffa1c35c35781663ae192[m
+Merge: 3c12f75 09d78b3
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 14:24:20 2017 +0900
+
+    merge
+
+[33mcommit 3c12f75a1e782229148bb108d87bc463d5f301b2[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Sun Aug 13 14:17:12 2017 +0900
+
+    UploadPerformanceActivity 캘린더 현재날짜,시간으로 초기화
+
+[33mcommit 09d78b3e70eced465db7591b162ce015a9ac0010[m
+Author: 하늘 <luvthemoon@haneul-ui-MacBook-Pro.local>
+Date:   Sun Aug 13 13:52:38 2017 +0900
+
+    addmap
+
+[33mcommit 42d0d3cc383ee6eeb27245921530d833d0fd023d[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Thu Aug 10 01:46:15 2017 +0900
+
+    Create README.md
+
+[33mcommit c9dd18d17f148c57f65aecd8ada9d0299cd0e8c5[m
+Author: inhwa <pih0902@gmail.com>
+Date:   Thu Aug 10 01:10:27 2017 +0900
+
+    initial commit

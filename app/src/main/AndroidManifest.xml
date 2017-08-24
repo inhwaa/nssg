@@ -36,12 +36,18 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.inhwa.nan.activity.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name="com.inhwa.nan.activity.Splash_Activity"
+            android:theme="@style/splash"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.inhwa.nan.activity.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
@@ -91,6 +97,10 @@
             android:name="com.inhwa.nan.activity.EditInformationActivity"
             android:windowSoftInputMode="adjustPan"></activity>
 
+        <activity
+            android:name="com.inhwa.nan.activity.ArtistInfoActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.inhwa.nan"
@@ -102,10 +112,6 @@
         </provider>
 
         <activity android:name="com.inhwa.nan.activity.MapsActivityCurrentPlace">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity

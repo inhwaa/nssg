@@ -31,7 +31,11 @@ public class AppConfig {
     // Server artist info url
     public static String URL_DOWNLOAD_ARTIST = "http://220.230.122.180/download_artist.php";
 
-	public static String URL_CHECK_LIKE = "http://220.230.122.180/check_like.php";
+	// Add Like
+	public static String URL_ADD_LIKE = "http://220.230.122.180/add_like.php";
+
+	// Cancel Like
+	public static String URL_DELETE_LIKE = "http://220.230.122.180/delete_like.php";
 
 	public static String URL_REGISTER_ARTIST2 = "http://220.230.122.180/register_artist2.php";
 

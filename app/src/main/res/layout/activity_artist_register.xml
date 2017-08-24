@@ -6,14 +6,13 @@
     android:orientation="vertical"
     android:background="@color/bg_register">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp"
         android:background="@color/bg_register">
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -25,12 +24,25 @@
             android:background="@color/bg_register">
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/real_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/input_register_bg"
-                android:hint="@string/hint_name"
+                android:hint="이름"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:inputType="textCapWords"
+                android:textColor="@color/input_register"
+                android:textColorHint="@color/input_register_hint" />
+
+            <EditText
+                android:id="@+id/artist_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/input_register_bg"
+                android:hint="아티스트 명"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:inputType="textCapWords"
@@ -43,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/input_register_bg"
-                android:hint="@string/hint_email"
+                android:hint="이메일"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:singleLine="true"
@@ -56,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/input_register_bg"
-                android:hint="@string/hint_password"
+                android:hint="비밀번호"
                 android:inputType="textPassword"
                 android:padding="10dp"
                 android:singleLine="true"
@@ -74,7 +86,7 @@
                 android:scrollbars="vertical"
                 android:layout_marginBottom="10dp"
                 android:background="@color/input_register_bg"
-                android:hint="Please introduce the artist"
+                android:hint="아티스트 소개 입력"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/input_register"
@@ -89,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:background="?attr/colorPrimary"
-                android:text="Email Verification"
+                android:text="이메일로 인증받기"
                 android:textColor="@color/white" />
 
             <!-- Login Button -->
@@ -100,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:background="?attr/colorPrimary"
-                android:text="@string/btn_register"
+                android:text="완료"
                 android:textColor="@color/white" />
 
             <!-- Link to Login Screen -->

@@ -25,6 +25,8 @@ import com.bumptech.glide.Glide;
 import com.inhwa.nan.R;
 import com.inhwa.nan.app.AppConfig;
 import com.inhwa.nan.app.AppController;
+import com.inhwa.nan.helper.SQLiteHandler;
+import com.inhwa.nan.helper.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +52,10 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
+    private SQLiteHandler db;
+    private SessionManager session;
+
+    private String email;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +78,16 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
             imagesubject = resources.getStringArray(R.array.genre_picture);
         }
 
+        // SqLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // session manager
+        session = new SessionManager(getApplicationContext());
+
+        // Fetching user details from SQLite
+        HashMap<String, String> user = db.getUserDetails();
+        email = user.get("email");
+
         initCollapsingToolbar();
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
@@ -90,7 +106,6 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
         try {
             // Picasso 또는 Glide 이용해서 collaspingToolbar image 설정
-//            Picasso.with(this).load(imagesubject[position % imagesubject.length]).fit().into((ImageView)findViewById(R.id.backdrop));
             Glide.with(this).load(imagesubject[position % imagesubject.length]).into((ImageView) findViewById(R.id.backdrop));
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,7 +178,7 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
-                                String PID = performance.getString("performance_no");
+                                int PID = performance.getInt("performance_no");
                                 String title = performance.getString("title");
                                 String content = performance.getString("content");
                                 String region = performance.getString("region");
@@ -171,9 +186,13 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 String pdate = performance.getString("perform_date");
                                 String ptime = performance.getString("perform_time");
                                 String image = performance.getString("image");
+                                String location = performance.getString("location");
+                                int like_state = performance.getInt("like_state");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image);
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location);
+
+
                                 performanceList.add(p);
                             }
                             adapter.notifyDataSetChanged();
@@ -197,16 +216,15 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }) {
-
                 @Override
                 protected Map<String, String> getParams() {
                     // php 에 parameter 보내기
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("region",subject[position % subject.length]);
+                    params.put("email",email);
                     return params;
                 }
             };
-
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
         }
         // genre로 찾기
@@ -227,10 +245,9 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
 
                         // Check for error node in json
                         if (!error) {
-
                             for (int i = 0; i < jArry.length(); i++) {
                                 JSONObject performance = jArry.getJSONObject(i);
-                                String PID = performance.getString("performance_no");
+                                int PID = performance.getInt("performance_no");
                                 String title = performance.getString("title");
                                 String content = performance.getString("content");
                                 String region = performance.getString("region");
@@ -238,12 +255,14 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                                 String pdate = performance.getString("perform_date");
                                 String ptime = performance.getString("perform_time");
                                 String image = performance.getString("image");
+                                String location = performance.getString("location");
+                                int like_state = performance.getInt("like_state");
 
                                 // Performance class 생성, 리스트에 추가한다.
-                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image);
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, location);
+
                                 performanceList.add(p);
                             }
-
                             adapter.notifyDataSetChanged();
 
                         } else {
@@ -259,24 +278,22 @@ public class ListOfPerformanceActivity extends AppCompatActivity {
                     }
                 }
             }, new Response.ErrorListener() {
-
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Toast.makeText(getApplicationContext(),
                             error.getMessage(), Toast.LENGTH_LONG).show();
                 }
             }) {
-
                 @Override
                 protected Map<String, String> getParams() {
                     // php 에 parameter 보내기
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("genre",subject[position % subject.length]);
+                    params.put("email",email);
 
                     return params;
                 }
             };
-
             AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
         }
     }

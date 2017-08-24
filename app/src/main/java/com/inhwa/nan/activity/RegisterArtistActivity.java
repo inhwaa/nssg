@@ -48,7 +48,6 @@ public class RegisterArtistActivity extends Activity {
     private SessionManager session;
     private SQLiteHandler db;
 
-
     final int REGISTER = 1;
     final int REGISTER2 = 2;
 
@@ -105,7 +104,6 @@ public class RegisterArtistActivity extends Activity {
                             "Please enter your details!", Toast.LENGTH_LONG)
                             .show();
                 }
-
             }
         });
 
@@ -118,7 +116,6 @@ public class RegisterArtistActivity extends Activity {
                 String introduction = inputIntroduction.getText().toString();
 
                 registerArtist(REGISTER2, name, email, password, introduction);
-
             }
         });
 
@@ -132,7 +129,6 @@ public class RegisterArtistActivity extends Activity {
                 finish();
             }
         });
-
     }
 
     /**
@@ -175,10 +171,8 @@ public class RegisterArtistActivity extends Activity {
                             JSONObject user = jObj.getJSONObject("user");
                             String name = user.getString("name");
                             String email = user.getString("email");
-                            String created_at = user
-                                    .getString("created_at");
+                            String created_at = user.getString("created_at");
                             String verify = user.getString("verify");
-
 
                             // Inserting row in users table
                             if(verify.matches("1")){
@@ -190,7 +184,7 @@ public class RegisterArtistActivity extends Activity {
                                 startActivity(intent);
                                 finish();
 
-                                Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다. 로그인해주세요.", Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(getApplicationContext(), "인증을 완료해야 회원가입이 완료됩니다.", Toast.LENGTH_LONG).show();
                             }
@@ -229,7 +223,6 @@ public class RegisterArtistActivity extends Activity {
 
                 return params;
             }
-
         };
 
         // Adding request to request queue

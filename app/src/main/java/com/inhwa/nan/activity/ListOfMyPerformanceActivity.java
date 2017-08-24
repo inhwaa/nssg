@@ -43,22 +43,18 @@ import java.util.Map;
 
 public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
-
-    public static final String PERFORMANCE = "performance";
     private SQLiteHandler db;
     private SessionManager session;
 
     private RecyclerView recyclerView;
     private PerformanceAdapter adapter;
     private List<Performance> performanceList;
-    // private List<Performance> myperformanceList;
     private String[] subject;
     private String[] imagesubject;
     private int selection;
     private int position;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SELECTION = "selection";
-    // public static final String EXTRA
 
     private String email;
 
@@ -76,12 +72,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
         initCollapsingToolbar();
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
         performanceList = new ArrayList<>();
-
         adapter = new PerformanceAdapter(this, performanceList, 1);
 
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setHasFixedSize(true);
@@ -98,10 +92,8 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
         HashMap<String, String> user = db.getUserDetails();
 
         email = user.get("email").toString();
-        //  String verify = user.get("verify");
 
         preparePerformances();
-
     }
 
     @Override
@@ -126,10 +118,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
      * Initializing collapsing toolbar
      * Will show and hide the toolbar title on scroll
      */
-    private void initCollapsingToolbar() {
+   private void initCollapsingToolbar() {
         final CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(" ");
+        collapsingToolbar.setTitle("내가 업로드한 공연");
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         appBarLayout.setExpanded(true);
 
@@ -144,10 +136,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle("내가 업로드했당꼐");
+                    collapsingToolbar.setTitle("내가 업로드한 공연");
                     isShow = true;
                 } else if (isShow) {
-                    collapsingToolbar.setTitle(" ");
+                    collapsingToolbar.setTitle("내가 업로드한 공연");
                     isShow = false;
                 }
             }
@@ -155,12 +147,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
     }
 
     private void preparePerformances() {
-
         // email로 찾기
         String tag_string_req = "req_per_email";
-
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
+        AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -172,10 +162,9 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
 
                     // Check for error node in json
                     if (!error) {
-
                         for (int i = 0; i < jArry.length(); i++) {
                             JSONObject performance = jArry.getJSONObject(i);
-                            String PID = performance.getString("performance_no");
+                            int PID = performance.getInt("performance_no");
                             String title = performance.getString("title");
                             String content = performance.getString("content");
                             String region = performance.getString("region");
@@ -183,9 +172,10 @@ public class ListOfMyPerformanceActivity extends AppCompatActivity {
                             String pdate = performance.getString("perform_date");
                             String ptime = performance.getString("perform_time");
                             String image = performance.getString("image");
+                            String location = performance.getString("location");
 
                             // Performance class 생성, 리스트에 추가한다.
-                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image); //수정삭제 가능한 페이지로 변경
+                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, location); //수정삭제 가능한 페이지로 변경
                             performanceList.add(p);
                         }
                         adapter.notifyDataSetChanged();
