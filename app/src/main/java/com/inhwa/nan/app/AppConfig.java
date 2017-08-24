@@ -19,6 +19,9 @@ public class AppConfig {
 	// Server user download performance url by region
 	public static String URL_DOWNLOAD_PERFORMANCE_REGION = "http://220.230.122.180/download_performance_region.php";
 
+	// Server user download performance url
+	public static String URL_DOWNLOAD_PERFORMANCE= "http://220.230.122.180/download_performance.php";
+
 	// Server user upload performance url
 	public static String URL_UPLOAD_PERFORMANCE = "http://220.230.122.180/upload_performance.php";
 

@@ -47,8 +47,7 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PerformanceAdapter adapter;
     private List<Performance> performanceList;
-    private String[] subject;
-    private String[] imagesubject;
+
     private int selection;
     private int position;
     public static final String EXTRA_POSITION = "position";
@@ -72,9 +71,10 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         selection = getIntent().getIntExtra(EXTRA_SELECTION, 0);
         Resources resources = getResources();
 
+        initCollapsingToolbar();
 
         performanceList = new ArrayList<>();
-        adapter = new PerformanceAdapter(this, performanceList, 1);
+        adapter = new PerformanceAdapter(this, performanceList,0);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 1);
@@ -91,10 +91,9 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         // Fetching user details from SQLite
         HashMap<String, String> user = db.getUserDetails();
-
         email = user.get("email").toString();
 
-        preparePerformances();
+        preparePerformances(email);
     }
 
     @Override
@@ -108,12 +107,22 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Initializing collapsing toolbar
+     * Will show and hide the toolbar title on scroll
+     */
+    private void initCollapsingToolbar() {
+        final CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle("스크랩한 공연");
+        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        appBarLayout.setExpanded(false,false);
+    }
 
-    private void preparePerformances() {
-        // email로 찾기
-        String tag_string_req = "req_per_email";
+    private void preparePerformances(final String email) {
+        String tag_string_req = "req_performance";
         StringRequest strReq = new StringRequest(Request.Method.POST,
-        AppConfig.URL_MY_PERFORMANCE, new Response.Listener<String>() {
+        AppConfig.URL_DOWNLOAD_PERFORMANCE, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -126,20 +135,32 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
                     // Check for error node in json
                     if (!error) {
                         for (int i = 0; i < jArry.length(); i++) {
-                            JSONObject performance = jArry.getJSONObject(i);
-                            int PID = performance.getInt("performance_no");
-                            String title = performance.getString("title");
-                            String content = performance.getString("content");
-                            String region = performance.getString("region");
-                            String genre = performance.getString("genre");
-                            String pdate = performance.getString("perform_date");
-                            String ptime = performance.getString("perform_time");
-                            String image = performance.getString("image");
-                            String location = performance.getString("location");
 
-                            // Performance class 생성, 리스트에 추가한다.
-                            Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, location); //수정삭제 가능한 페이지로 변경
-                            performanceList.add(p);
+                            JSONObject performance = jArry.getJSONObject(i);
+
+                            if (performance.getInt("scrap_state") == 1) {
+                                int PID = performance.getInt("performance_no");
+                                String title = performance.getString("title");
+                                String content = performance.getString("content");
+                                String region = performance.getString("region");
+                                String genre = performance.getString("genre");
+                                String pdate = performance.getString("perform_date");
+                                String ptime = performance.getString("perform_time");
+                                String image = performance.getString("image");
+                                String location = performance.getString("location");
+                                int like_state = performance.getInt("like_state");
+                                int scrap_state = performance.getInt("scrap_state");
+                                int artist_no = performance.getInt("artist_no");
+                                int price = performance.getInt("price");
+                                int like_freq = performance.getInt("like_freq");
+                                int scrap_freq = performance.getInt("scrap_freq");
+
+                                // Performance class 생성, 리스트에 추가한다.
+                                Performance p = new Performance(PID, title, content, region, genre, pdate, ptime, image, like_state, scrap_state,
+                                        location, artist_no, price, like_freq, scrap_freq);
+                                performanceList.add(p);
+                            }
+
                         }
                         adapter.notifyDataSetChanged();
 
@@ -168,7 +189,6 @@ public class ListOfScrapPerformanceActivity extends AppCompatActivity {
                 // php 에 parameter 보내기
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("email", email);
-
                 return params;
             }
         };
