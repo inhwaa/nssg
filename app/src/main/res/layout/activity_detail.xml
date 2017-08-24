@@ -6,8 +6,8 @@
     android:id="@+id/detail_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,12 +19,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:background="@drawable/border"
             android:id="@+id/performance_title"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:padding="10dp"
             android:textAlignment="center"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -51,157 +53,157 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="아티스트"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/detail_titles"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:background="@drawable/border"
                     android:id="@+id/performance_artist"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_weight="1"
-                    android:text="브로콜리너마저"
+                    android:background="@drawable/border"
                     android:gravity="center"
+                    android:text="브로콜리너마저"
                     android:textSize="16sp" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/md_keylines"
                         android:layout_marginTop="@dimen/md_keylines"
+                        android:gravity="center"
                         android:text="날짜"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/detail_titles"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/border"
-                        android:gravity="center"
                         android:id="@+id/performance_date"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/border"
+                        android:gravity="center"
                         android:text="2017-06-21" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/md_keylines"
                         android:layout_marginTop="@dimen/md_keylines"
+                        android:gravity="center"
                         android:text="시간"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/detail_titles"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginLeft="5dp"
-                        android:background="@drawable/border"
-                        android:gravity="center"
                         android:id="@+id/performance_time"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/border"
+                        android:gravity="center"
                         android:text="03:00PM" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/md_keylines"
                         android:layout_marginTop="@dimen/md_keylines"
+                        android:gravity="center"
                         android:text="장소"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/detail_titles"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginRight="5dp"
-                        android:background="@drawable/border"
-                        android:gravity="center"
                         android:id="@+id/performance_location"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/border"
+                        android:gravity="center"
                         android:text="홍대 놀이터" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/md_keylines"
                         android:layout_marginTop="@dimen/md_keylines"
+                        android:gravity="center"
                         android:text="가격"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/detail_titles"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_marginLeft="5dp"
-                        android:background="@drawable/border"
-                        android:gravity="center"
                         android:id="@+id/performance_price"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/border"
+                        android:gravity="center"
                         android:text="무료" />
 
                 </LinearLayout>
@@ -209,23 +211,23 @@
             </LinearLayout>
 
             <TextView
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/md_keylines"
                 android:layout_marginTop="@dimen/md_keylines"
+                android:gravity="center"
                 android:text="설명"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/detail_titles"
                 android:textStyle="bold" />
 
             <TextView
-                android:background="@drawable/border"
-                android:gravity="center"
                 android:id="@+id/performance_detail"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginBottom="50dp"
+                android:background="@drawable/border"
+                android:gravity="center"
                 android:text="첫 번째 게릴라 버스킹 많이 즐기러 와주세요!" />
         </LinearLayout>
 
